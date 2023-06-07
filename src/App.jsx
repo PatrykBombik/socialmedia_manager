@@ -1,11 +1,12 @@
-import EarnCalculator from "./components/earncalculator.jsx";
-import Grid from '@mui/material/Grid';
+import EarnCalculator from "./components/landingpage/earncalculator.jsx";
+import Article from "./components/landingpage/article.jsx";
 
 
 function App() {
     return (
         <>
             <EarnCalculator/>
+            <Article/>
 </>
 )
 }

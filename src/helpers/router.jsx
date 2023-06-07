@@ -3,7 +3,7 @@ import Layout from "../components/Layout.jsx";
 import App from "../App.jsx";
 import Registration from "../components/registration.jsx";
 import Login from "../components/login.jsx";
-import Dashboard from "../components/dashboard.jsx";
+import Daily from "../components/daily.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -23,8 +23,8 @@ export const router = createBrowserRouter([
                 element: <Login/>,
             },
             {
-                path: "/dashboard",
-                element: <Dashboard/>,
+                path: "/daily",
+                element: <Daily/>,
             },
         ]
     },

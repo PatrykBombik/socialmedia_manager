@@ -1,6 +1,5 @@
 import Grid from "@mui/material/Grid";
-import React from "react";
-import earningCalcImage from "../assets/earningcalc.jpg";
+import earningCalcImage from "../../assets/earningcalc.jpg";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
