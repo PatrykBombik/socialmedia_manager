@@ -42,7 +42,7 @@ export default function AskForm() {
                     </Grid>
                     <Grid item md={4} sm={4} xs={12}>
                         <Button variant="contained" endIcon={<SendIcon />}>
-                            Send
+                            Wyślij
                         </Button>
                     </Grid>
                 </Grid>
