@@ -21,6 +21,7 @@ const pages = [
     {page: "Zarejestruj się", url: "/registration"},
     {page: "Zaloguj się", url: "/login"},
 ];
+
 // const settings = []; TODO ADD AVATAR AFTER LOGIN
 
 function ResponsiveAppBar() {
@@ -104,7 +105,7 @@ function ResponsiveAppBar() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href=""
+                        href="/"
                         sx={{
                             mr: 2,
                             display: {xs: 'flex', md: 'none'},
@@ -116,18 +117,19 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        SocialMedia
                     </Typography>
-                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                        {pages.map((page) => (<Button
-                            key={page.page}
-                            onClick={handleCloseNavMenu}
-                            sx={{my: 2, color: 'white', display: 'block'}}
-                        >
-                            <Link style={{color: "white", textDecoration: "none"}} to={page.url}>
-                                {page.page}
-                            </Link>
-                        </Button>))}
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}, justifyContent: "flex-end"}}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page.page}
+                                onClick={handleCloseNavMenu}
+                                sx={{my: 2, color: 'white', display: 'block'}}
+                            >
+                                <Link style={{color: "white", textDecoration: "none"}} to={page.url}>
+                                    {page.page}
+                                </Link>
+                            </Button>))}
                     </Box>
                     {/* TODO ADD AVATAR AFTER LOGIN*/}
                     {/*<Box sx={{flexGrow: 0}}>*/}

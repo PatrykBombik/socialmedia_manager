@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 export default function AskForm() {
     return (
         <Container maxWidth="xl" sx={{
-            marginTop: "5%",
+            marginTop: "50px",
 
         }}>
             <Grid container spacing={2}>
@@ -25,7 +25,7 @@ export default function AskForm() {
                         />
                         <TextField
                             sx={{
-                                marginTop: "10%"
+                                marginTop: "50px"
                         }}
                             id="outlined-basic"
                             label="Wpisz swoje imię"

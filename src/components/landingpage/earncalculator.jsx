@@ -34,15 +34,19 @@ function valuetext(value) {
 export default function EarnCalculator() {
     return (
 
-        <Container maxWidth="xl" style={{marginTop: "5%"}}>
+        <Container maxWidth="xl" style={{marginTop: "50px"}}>
 
-            <Grid container spacing={2} >
-                <Grid item md={6} sm={6} xs={12}>
-                    <h1 style={{marginTop: "10%"}}>Zacznij monetyzować swoje social media już dziś!</h1>
-                    <h3 style={{marginTop: "10%"}}>Ilu fanów potrafisz przekonać?</h3>
+            <Grid container spacing={2} sx={{
+                alignItems: "center",
+            }}>
+                <Grid item md={6} sm={6} xs={12} sx={{
+                    textAlign: "center",
+
+                }}>
+                    <h2 style={{marginTop: "50px"}}>Zacznij monetyzować swoje social media już dziś!</h2>
+                    <h4 style={{marginTop: "50px"}}>Ilu fanów potrafisz przekonać?</h4>
                     <Box
-                        sx={{width: 300}}
-                        style={{marginTop: "10%"}}
+                        sx={{width: 300, margin: "50px auto 0"}}
                     >
                         <Slider
                             style={{color: "lightblue"}}
@@ -57,11 +61,10 @@ export default function EarnCalculator() {
                         </Box>
                 </Grid>
                 <Grid item md={6} sm={6} xs={12}>
-                    <Box>
-                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "10%"}} src={earningCalcImage} alt="woman earning money"/>
-                        <p style={{textAlign: "center"}}>Przykładowe miesięcze dochody to:</p>
-                        <h3 style={{textAlign: "center"}}>1000$</h3>
-                    </Box>
+                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px"}} src={earningCalcImage} alt="woman earning money"/>
+                        <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
+                        <h2 style={{textAlign: "center"}}>1000$</h2>
+
                 </Grid>
 
             </Grid>

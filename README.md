@@ -7,3 +7,4 @@
 - mui: ^5.13.3
 - formik: ^2.4.1
 - react-router v6.4
+- json-server v0.17.3

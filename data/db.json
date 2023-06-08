@@ -1,0 +1,74 @@
+{
+  "Twitter": [
+    {
+      "id": 1,
+      "title": "Wrzuć 3 posty",
+      "description": "Opis zadania na Twitterze",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    },
+    {
+      "id": 2,
+      "title": "Udostępnij relację",
+      "description": "Opis zadania na Twitterze",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    }
+  ],
+  "Reddit": [
+    {
+      "id": 1,
+      "title": "Wrzuć 3 posty",
+      "description": "Opis zadania na Reddicie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    },
+    {
+      "id": 2,
+      "title": "Odpowiedz na pytania użytkowników",
+      "description": "Opis zadania na Reddicie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    }
+  ],
+  "Instagram": [
+    {
+      "id": 1,
+      "title": "Wrzuć 3 posty",
+      "description": "Opis zadania na Instagramie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    },
+    {
+      "id": 2,
+      "title": "Zaplanuj następny post",
+      "description": "Opis zadania na Instagramie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    }
+  ],
+  "Snapchat": [
+    {
+      "id": 1,
+      "title": "Dodaj historię dnia",
+      "description": "Opis zadania na Snapchacie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    },
+    {
+      "id": 2,
+      "title": "Wyslij Snap do przyjaciela",
+      "description": "Opis zadania na Snapchacie",
+      "status": "open",
+      "dateAdded": "2023-06-05",
+      "timeSpent": "0h 0m"
+    }
+  ]
+}

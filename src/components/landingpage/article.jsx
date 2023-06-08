@@ -7,16 +7,18 @@ import platform from "../../assets/platform.jpg"
 
 const imgStyle = {
     width: "25%",
-    height: "Auto",
-    marginTop: "10%",
+    height: "100px",
+    marginTop: "50px",
 }
 
 const gridStyle = {
-    marginTop: "5%",
+    marginTop: "50px",
     width: "30%",
     height: "auto",
-    justifyContent: "flex-start",
-    alignItems: "flex-start"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
 }
 
 const h2Style = {
@@ -25,7 +27,7 @@ const h2Style = {
 
 export default function Article() {
     return (
-        <Container maxWidth="xl" style={{marginTop: "5%"}}>
+        <Container maxWidth="xl" style={{marginTop: "50px"}}>
             <Grid container spacing={2}>
                 <Grid container spacing={2}>
                     <Grid item md={4} sm={4} xs={12} style={gridStyle}>

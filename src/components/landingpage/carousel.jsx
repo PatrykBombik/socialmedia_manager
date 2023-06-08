@@ -15,7 +15,7 @@ width: "10%",
 export default function TextCarousel() {
 
     return (
-        <Container maxWidth="xl" style={{marginTop: "5%"}}>
+        <Container maxWidth="xl" style={{marginTop: "50px"}}>
             <Carousel showThumbs={false}>
 
                 <div>

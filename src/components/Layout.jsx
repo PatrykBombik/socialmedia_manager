@@ -6,7 +6,13 @@ function Layout() {
     return (
         <>
             <ResponsiveAppBar />
+            <div style={{
+                maxWidth: "1440px",
+                width: "100%",
+                margin: "0 auto"
+            }}>
             <Outlet />
+            </div>
             <Footer/>
         </>
     );
