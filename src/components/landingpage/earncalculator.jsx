@@ -3,6 +3,7 @@ import earningCalcImage from "../../assets/earningcalc.jpg";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import {TextField} from "@mui/material";
 
 const marks = [
     {
@@ -29,6 +30,10 @@ const marks = [
 
 function valuetext(value) {
     return `${value}%`;
+}
+
+function subValue(value) {
+    return `$${value}`;
 }
 
 export default function EarnCalculator() {
@@ -58,17 +63,48 @@ export default function EarnCalculator() {
                             valueLabelDisplay="on"
                             valueLabelFormat={valuetext}
                         />
-                        </Box>
+                    </Box>
+                    <Box sx={{
+                        display: "flex",
+                        gap: "2",
+                        justifyContent: "space-around",
+                        alignItems:"center",
+                        marginTop: "25px"
+                    }}>
+                        <TextField
+                            id="outlined-number"
+                            label="Ilość Twoich fanów"
+                            type="number"
+                            size={"small"}
+                            defaultValue={10000}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+
+                        <TextField
+                            id="outlined-number"
+                            label="Cena miesięcznej subskrypcji"
+                            type="number"
+                            defaultValue={9.99}
+                            size={"small"}
+                            InputLabelProps={{
+                                shrink: true,
+                                startAdornment: '$'
+                            }}/>
+                    </Box>
+
                 </Grid>
                 <Grid item md={6} sm={6} xs={12}>
-                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px", borderRadius: "10px"}} src={earningCalcImage} alt="woman earning money"/>
-                        <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
-                        <h2 style={{textAlign: "center"}}>1000$</h2>
+                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px", borderRadius: "10px"}}
+                         src={earningCalcImage} alt="woman earning money"/>
+                    <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
+                    <h2 style={{textAlign: "center"}}>1000$</h2>
 
                 </Grid>
 
             </Grid>
         </Container>
 
-)
+    )
 }
