@@ -11,36 +11,46 @@ export default function AskForm() {
 
         }}>
             <Grid container spacing={2}>
-                <Grid item md={6} sm={6} xs={12}>
+                <Grid item md={12} sm={12} xs={12} sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center"
+                }}>
                     <h1>Masz pytania, wątpliwości?</h1>
                     <p>Nie wstydź się i zadaj nam pytanie!</p>
                 </Grid>
                 <Grid container spacing={2}>
-                    <Grid item md={4} sm={4} xs={12}>
-                        <TextField
+                    <Grid item md={4} sm={12} xs={12} sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: 1
+                    }}>
+                        <TextField style={{marginLeft: "20px"}}
                             required
                             id="outlined-required"
                             label="E-mail required"
 
                         />
-                        <TextField
-                            sx={{
-                                marginTop: "50px"
-                        }}
+                        <TextField style={{marginLeft: "20px"}}
                             id="outlined-basic"
                             label="Wpisz swoje imię"
                             variant="outlined"
                         />
                     </Grid>
-                    <Grid item md={4} sm={4} xs={12}>
+                    <Grid item md={4} sm={12} xs={12}>
                         <TextField
+                            style={{marginLeft: "5px"}}
                             id="outlined-textarea"
                             label="Wpisz swoje pytanie"
                             placeholder="Co chciałbyś nas zapytać?"
                             multiline
+                            fullWidth={true}
+                            rows={4}
                         />
                     </Grid>
-                    <Grid item md={4} sm={4} xs={12}>
+                    <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <Button variant="contained" endIcon={<SendIcon />}>
                             Wyślij
                         </Button>

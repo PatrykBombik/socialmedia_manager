@@ -55,11 +55,11 @@ export default function Article() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center"}}>
-                        <h1 style={{textAlign: "center"}}>Dostęp do naszej platformy to tylko 24,99$!</h1>
-                        <p style={{textAlign: "center"}}>Za 24,99$ dostaniesz dostęp do wiedzy zdobywanej ponad 3 lata, dzięki której zarobki rzędu 10 000 zł - 12 000 zł to normalność. Jeżeli nie uda, Ci się zarobić w pierwszym miesiącu 25$ zwrócimy Ci pieniądze!</p>
+                        <h1 style={{textAlign: "center", marginLeft: "15px"}}>Dostęp do naszej platformy to tylko 24,99$!</h1>
+                        <p style={{textAlign: "center", marginLeft: "15px"}}>Za 24,99$ dostaniesz dostęp do wiedzy zdobywanej ponad 3 lata, dzięki której zarobki rzędu 10 000 zł - 12 000 zł to normalność. Jeżeli nie uda, Ci się zarobić w pierwszym miesiącu 25$ zwrócimy Ci pieniądze!</p>
                     </Grid>
-                    <Grid item md={6} sm={6} xs={12} style={gridStyle}>
-                        <img src={platform} style={{width:"100%"}}/>
+                    <Grid item md={6} sm={6} xs={12}>
+                        <img src={platform} style={{width:"100%", marginLeft: "10px", borderRadius: "10px"}}/>
                     </Grid>
                 </Grid>
             </Grid>

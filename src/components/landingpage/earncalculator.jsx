@@ -61,7 +61,7 @@ export default function EarnCalculator() {
                         </Box>
                 </Grid>
                 <Grid item md={6} sm={6} xs={12}>
-                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px"}} src={earningCalcImage} alt="woman earning money"/>
+                    <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px", borderRadius: "10px"}} src={earningCalcImage} alt="woman earning money"/>
                         <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
                         <h2 style={{textAlign: "center"}}>1000$</h2>
 

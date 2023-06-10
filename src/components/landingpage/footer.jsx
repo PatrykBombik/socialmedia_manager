@@ -10,13 +10,13 @@ export default function Footer() {
             textDecoration: "none",
         }}>
         <Grid container spacing={2}>
-            <Grid item md={12} sm={12} xs={12}>
+            <Grid item md={12} sm={12} xs={12} sx={{display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
                 <Button href="/">Jak zacząć?</Button>
                 <Button href="/daily">Daily</Button>
                 <Button href="/">Zarejestruj się</Button>
                 <Button href="/login">Logowanie</Button>
             </Grid>
-            <Grid item md={12} sm={12} xs={12}>
+            <Grid item md={12} sm={12} xs={12} sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                 <p>SocialMediaManager</p>
                 <p>© 2023 Your Company.  All rights reserved.</p>
             </Grid>

@@ -16,8 +16,7 @@ export default function TextCarousel() {
 
     return (
         <Container maxWidth="xl" style={{marginTop: "50px"}}>
-            <Carousel showThumbs={false}>
-
+            <Carousel showThumbs={false} autoPlay infiniteLoop showArrows={true}>
                 <div>
                     <p>"Genialny poradnik i zarazem narzędzie, dzięki któremu jestem sama sobie szefem!"</p>
                     <img src={avatar1} alt="Avatar 1" style={avatarStyle}/>
