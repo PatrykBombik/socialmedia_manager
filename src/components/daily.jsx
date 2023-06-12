@@ -1,6 +1,6 @@
 import {Container, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
-import {getAllTasks, sendTaskData} from "../helpers/api.jsx";
+import {deleteTaskAPI, getAllTasks, sendTaskData} from "../helpers/api.jsx";
 import Button from "@mui/material/Button";
 
 export default function Daily() {
@@ -25,6 +25,12 @@ export default function Daily() {
         setTittleTwitter('');
         setDescTwitter('');
         setTasksTwitter([...tasksTwitter, result])
+    }
+
+    async function handleTwitterDelete(event) {
+        const id = +event.target.dataset.id
+        await deleteTaskAPI("Twitter", id);
+        setTasksTwitter(tasksTwitter.filter((task) => task.id !== id))
     }
 
     const [tasksReddit, setTasksReddit] = useState([]);
@@ -99,7 +105,7 @@ export default function Daily() {
                                 <strong>{task.title}</strong> <span> - {task.description}</span>
                                 <button>Add operation</button>
                                 <button>Finish</button>
-                                <button>Delete</button>
+                                <button onClick={handleTwitterDelete} data-id={task.id}>Delete</button>
                             </div>
                         ))}
                     </section>

@@ -15,3 +15,9 @@ export async function sendTaskData(social, data) {
     )
     return response.json()
 }
+
+export async function deleteTaskAPI(social, id) {
+    const response = await fetch(`http://localhost:3000/${social}/${id}`,
+        { method: 'DELETE'})
+    return response.json();
+}
