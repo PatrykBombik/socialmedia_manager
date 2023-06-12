@@ -3,7 +3,7 @@ import Layout from "../components/Layout.jsx";
 import App from "../App.jsx";
 import Registration from "../components/registration.jsx";
 import Login from "../components/login.jsx";
-import Daily from "../components/daily.jsx";
+import Daily from "../components/daily/daily.jsx";
 
 export const router = createBrowserRouter([
     {

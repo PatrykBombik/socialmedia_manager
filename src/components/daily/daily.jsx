@@ -1,12 +1,14 @@
 import {Container, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
-import {deleteTaskAPI, getAllTasks, sendTaskData} from "../helpers/api.jsx";
+import {deleteTaskAPI, getAllTasks, sendDataAPI} from "../../helpers/api.jsx";
 import Button from "@mui/material/Button";
+import AddOperations from "./addoperations.jsx";
 
 export default function Daily() {
     const [tasksTwitter, setTasksTwitter] = useState([]);
     const [titleTwitter, setTittleTwitter] = useState('');
     const [descTwitter, setDescTwitter] = useState('');
+    const [operationTwitterId, setOperationTwitterId] = useState(null);
 
     useEffect(() => {
         getAllTasks("Twitter")
@@ -18,9 +20,12 @@ export default function Daily() {
 
     async function handleTwitterSubmit(event) {
         event.preventDefault();
-        const result = await sendTaskData("Twitter", {
-            title: titleTwitter, description: descTwitter, status: 'open', addedDate: new Date()
-        });
+        const result = await sendDataAPI( {
+            title: titleTwitter,
+            description: descTwitter,
+            status: 'open',
+            addedDate: new Date()
+        },"Twitter");
 
         setTittleTwitter('');
         setDescTwitter('');
@@ -32,6 +37,7 @@ export default function Daily() {
         await deleteTaskAPI("Twitter", id);
         setTasksTwitter(tasksTwitter.filter((task) => task.id !== id))
     }
+
 
     const [tasksReddit, setTasksReddit] = useState([]);
     const [titleReddit, setTittleReddit] = useState('');
@@ -103,7 +109,11 @@ export default function Daily() {
                         {tasksTwitter.map((task) => (
                             <div key={task.id}>
                                 <strong>{task.title}</strong> <span> - {task.description}</span>
-                                <button>Add operation</button>
+                                {operationTwitterId === task.id ? (<AddOperations taskId={task.id}/>) : (
+                                    <button onClick={() => setOperationTwitterId(task.id)}>
+                                        Add operation
+                                    </button>
+                                )}
                                 <button>Finish</button>
                                 <button onClick={handleTwitterDelete} data-id={task.id}>Delete</button>
                             </div>

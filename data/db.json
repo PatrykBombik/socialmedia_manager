@@ -5,16 +5,28 @@
       "title": "Wrzuć 3 posty",
       "description": "Opis zadania na Twitterze",
       "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
+      "addedDate": "2023-06-05"
     },
     {
       "id": 2,
       "title": "Udostępnij relację",
       "description": "Opis zadania na Twitterze",
       "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
+      "addedDate": "2023-06-05"
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "status": "open",
+      "addedDate": "2023-06-12T18:20:12.492Z",
+      "id": 3
+    },
+    {
+      "title": "asd",
+      "description": "asd",
+      "status": "open",
+      "addedDate": "2023-06-12T18:20:23.910Z",
+      "id": 4
     }
   ],
   "Reddit": [
@@ -69,6 +81,22 @@
       "status": "open",
       "addedDate": "2023-06-05",
       "timeSpent": "0h 0m"
+    }
+  ],
+  "operations": [
+    {
+      "description": "asd",
+      "timeSpent": "0h 0m",
+      "addedDate": "2023-06-12T18:20:14.685Z",
+      "taskId": 3,
+      "id": 1
+    },
+    {
+      "description": "test",
+      "timeSpent": "0h 0m",
+      "addedDate": "2023-06-12T18:20:27.223Z",
+      "taskId": 4,
+      "id": 2
     }
   ]
 }
