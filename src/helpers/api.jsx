@@ -1,5 +1,5 @@
-export async function getAllTasks(social) {
-    const response = await fetch(`http://localhost:3000/${social}`)
+export async function getDataAPI(endpoint) {
+    const response = await fetch(`http://localhost:3000/${endpoint}`)
     return response.json()
 }
 
@@ -30,8 +30,8 @@ export async function sendDataAPI(data, endpoint) {
 //     return response.json()
 // }
 
-export async function deleteTaskAPI(social, id) {
-    const response = await fetch(`http://localhost:3000/${social}/${id}`,
+export async function deleteTaskAPI(endpoint, id) {
+    const response = await fetch(`http://localhost:3000/${endpoint}/${id}`,
         { method: 'DELETE'})
     return response.json();
 }
