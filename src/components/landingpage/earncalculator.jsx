@@ -3,7 +3,8 @@ import earningCalcImage from "../../assets/earningcalc.jpg";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import {TextField} from "@mui/material";
+import {InputAdornment, TextField} from "@mui/material";
+import {useState} from "react";
 
 const marks = [
     {
@@ -32,11 +33,38 @@ function valuetext(value) {
     return `${value}%`;
 }
 
-function subValue(value) {
-    return `$${value}`;
-}
-
 export default function EarnCalculator() {
+
+    const [sliderValue, setSliderValue] = useState(1);
+    const handleSliderValue = (event, newValue) => {
+        setSliderValue(newValue);
+        calculateEarnings(followersValue, subscriptionValue, newValue)
+    }
+
+    const [followersValue, setFollowersValue] = useState(10000);
+
+    const handleFollowersValue = (event) => {
+    setFollowersValue(event.target.value);
+        calculateEarnings(event.target.value, subscriptionValue, sliderValue)
+    }
+
+    const [subscriptionValue, setSubscriptionValue] = useState(9.99);
+
+    const handleSubscriptionValue = (event) => {
+        setSubscriptionValue(event.target.value);
+        calculateEarnings(followersValue, event.target.value, sliderValue)
+    }
+
+
+    const [earnings, setEarnings] = useState((sliderValue*followersValue*subscriptionValue)/100);
+
+    const calculateEarnings = (sliderValue, followersValue, subscriptionValue) => {
+        const earnings = Math.round((sliderValue * followersValue * subscriptionValue) / 100);
+        setEarnings(earnings)
+    }
+
+
+
     return (
 
         <Container maxWidth="xl" style={{marginTop: "50px"}}>
@@ -62,6 +90,8 @@ export default function EarnCalculator() {
                             marks={marks}
                             valueLabelDisplay="on"
                             valueLabelFormat={valuetext}
+                            value={sliderValue}
+                            onChange={handleSliderValue}
                         />
                     </Box>
                     <Box sx={{
@@ -73,10 +103,21 @@ export default function EarnCalculator() {
                     }}>
                         <TextField
                             id="outlined-number"
-                            label="Ilość Twoich fanów"
+                            label="Ilość followersów"
                             type="number"
                             size={"small"}
+                            inputProps={{
+                                step: 1000,
+                                min: 1000,
+                                onKeyPress: (event) => {
+                                    if (event.key === '-' || event.key === 'e' || event.key === '.' || event.key === ',') {
+                                        event.preventDefault();
+                                    }
+                                }
+                            }}
                             defaultValue={10000}
+                            value={followersValue}
+                            onChange={handleFollowersValue}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -88,10 +129,23 @@ export default function EarnCalculator() {
                             type="number"
                             defaultValue={9.99}
                             size={"small"}
+                            error={false}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">$</InputAdornment>,
+                                inputProps: {
+                                    min: 1,
+                                    onKeyPress: (event) => {
+                                        if (event.key === '-' || event.key === 'e' || event.key === '.') {
+                                            event.preventDefault();
+                                        }
+                                }
+                            }}}
+                            value={subscriptionValue}
+                            onChange={handleSubscriptionValue}
                             InputLabelProps={{
                                 shrink: true,
-                                startAdornment: '$'
-                            }}/>
+                            }}
+                            />
                     </Box>
 
                 </Grid>
@@ -99,7 +153,7 @@ export default function EarnCalculator() {
                     <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px", borderRadius: "10px"}}
                          src={earningCalcImage} alt="woman earning money"/>
                     <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
-                    <h2 style={{textAlign: "center"}}>1000$</h2>
+                    <h2 style={{textAlign: "center"}}>{earnings} $</h2>
 
                 </Grid>
 
