@@ -2,10 +2,10 @@ import {useState} from "react";
 import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function  AddSnapchatOperations({taskId, setOperationSnapchatId, setTasksSnapchat}) {
+function  AddInstagramOperations({taskId, setOperationInstagramId, setTasksInstagram}) {
     const [value, setValue] = useState('');
 
-    async function handleAddSnapchatOperation() {
+    async function handleAddInstagramOperation() {
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
@@ -14,14 +14,14 @@ function  AddSnapchatOperations({taskId, setOperationSnapchatId, setTasksSnapcha
                 taskId
             }, 'operations');
 
-            setTasksSnapchat((prev) =>
+            setTasksInstagram((prev) =>
                 prev.map((task) => {
                     if (task.id !== taskId) return task;
                     const operations = task.operations ?? [];
                     task.operations = [...operations, data]
                     return task
                 }))
-            setOperationSnapchatId(null);
+            setOperationInstagramId(null);
         }
     }
 
@@ -34,16 +34,16 @@ function  AddSnapchatOperations({taskId, setOperationSnapchatId, setTasksSnapcha
                 onChange={(event) => setValue(event.target.value)}
                 placeholder="Opis zadania"
             />
-            <button onClick={handleAddSnapchatOperation}>Confirm</button>
-            <button onClick={() => setOperationSnapchatId(null)}>Cancel</button>
+            <button onClick={handleAddInstagramOperation}>Confirm</button>
+            <button onClick={() => setOperationInstagramId(null)}>Cancel</button>
         </>
     );
 }
 
 
-AddSnapchatOperations.propTypes = {
+AddInstagramOperations.propTypes = {
     taskId: PropTypes.number,
-    setOperationSnapchatId: PropTypes.func,
-    setTasksSnapchat: PropTypes.func
+    setOperationInstagramId: PropTypes.func,
+    setTasksInstagram: PropTypes.func
 };
-export default AddSnapchatOperations
+export default AddInstagramOperations

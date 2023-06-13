@@ -75,93 +75,113 @@ function Twitter() {
         };
     }
 
+    function handleUndoFinishTask(id) {
+        return async function () {
+            await updateDataAPI({
+                    status: 'open'
+                },
+                'Twitter',
+                id,
+                'PATCH'
+            );
+            setTasksTwitter(tasksTwitter.map((task) => ({
+                ...task,
+                status: task.id === id ? 'open' : task.status
+            })))
+        };
+    }
+
+
     return (
         <>
-            <h1>Twitter</h1>
-            <form onSubmit={handleTwitterSubmit}>
-                <div>
-                    <label htmlFor="title">Nazwa zadania</label>
-                    <input
-                        value={titleTwitter}
-                        type="text"
-                        id="title"
-                        name="title"
-                        onChange={(event) => setTittleTwitter(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="desc">Opis zadania</label>
-                    <textarea
-                        id="desc"
-                        name="desc"
-                        value={descTwitter}
-                        onChange={(event) => setDescTwitter(event.target.value)}
-                    />
-                </div>
-                <Button variant="contained" onClick={handleTwitterSubmit}>Add</Button>
-            </form>
-            <section>
-                {tasksTwitter.map((task) => (
-                    <div key={task.id}>
-                        <strong>{task.title}</strong> <span> - {task.description}</span>
-                        {operationTwitterId === task.id ? (
-                            <AddTwitterOperations
-                                setTasksTwitter={setTasksTwitter}
-                                setOperationTwitterId={setOperationTwitterId}
-                                taskId={task.id}
+        <h1>Twitter</h1>
+        <form onSubmit={handleTwitterSubmit}>
+            <div>
+                <label htmlFor="title">Nazwa zadania</label>
+                <input
+                    value={titleTwitter}
+                    type="text"
+                    id="title"
+                    name="title"
+                    onChange={(event) => setTittleTwitter(event.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="desc">Opis zadania</label>
+                <textarea
+                    id="desc"
+                    name="desc"
+                    value={descTwitter}
+                    onChange={(event) => setDescTwitter(event.target.value)}
+                />
+            </div>
+            <Button variant="contained" onClick={handleTwitterSubmit}>Add</Button>
+        </form>
+        <section>
+            {tasksTwitter.map((task) => (
+                <div key={task.id}>
+                    <strong>{task.title}</strong> <span> - {task.description}</span>
+                    {operationTwitterId === task.id ? (
+                        <AddTwitterOperations
+                            setTasksTwitter={setTasksTwitter}
+                            setOperationTwitterId={setOperationTwitterId}
+                            taskId={task.id}
+                        />
+                    ) : (
+                        <>
+                            {task.status === 'open' && (<button onClick={() => setOperationTwitterId(task.id)}>
+                                Add operation
+                            </button>)}
+                        </>
+                    )}
+                    {task.status === 'open' && (
+                        <button onClick={handleFinishTask(task.id)}>Finish</button>
+                    )}
+                    {task.status === 'closed' && (
+                    <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
+                    )}
+            <button
+                onClick={() => handleTwitterDelete(task.id)}
+                data-id={task.id}
+            >Delete
+            </button>
+
+            <div>
+                {task.operations && task.operations.map((operation) => (
+                    <div key={operation.id}>
+                        <span>{operation.description} :</span>
+                        {operation.timeSpent !== 0 && (
+                            <strong>{~~(operation.timeSpent / 60)}h {operation.timeSpent % 60}m</strong>
+                        )}
+                        {operation.id === timeSpentID ? (
+                            <Addtimespenttwitter
+                                operationId={operation.id}
+                                timeSpent={operation.timeSpent}
+                                setTasks={setTasksTwitter}
+                                setTimeSpentId={setTimeSpentId}
+
                             />
                         ) : (
                             <>
-                                {task.status === 'open' && (<button onClick={() => setOperationTwitterId(task.id)}>
-                                    Add operation
-                                </button>)}
+                                {task.status === 'open' && (
+                                    <button onClick={() => setTimeSpentId(operation.id)}>Add Spent Time</button>
+                                )}
                             </>
                         )}
                         {task.status === 'open' && (
-                            <button onClick={handleFinishTask(task.id)}>Finish</button>
+                            <button
+                                onClick={() => handleDeleteTwitterOperation(operation.id)}
+                                data-operationid={operation.id}
+                            >Delete</button>
                         )}
-                        <button
-                            onClick={() => handleTwitterDelete(task.id)}
-                            data-id={task.id}
-                        >Delete
-                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+        ))}
+        </section>
+</>
+)
+}
 
-                        <div>
-                            {task.operations && task.operations.map((operation) => (
-                                <div key={operation.id}>
-                                    <span>{operation.description} :</span>
-                                    {operation.timeSpent !== 0 && (
-                                    <strong>{~~(operation.timeSpent / 60)}h {operation.timeSpent % 60}m</strong>
-                                    )}
-                                    {operation.id === timeSpentID ? (
-                                        <Addtimespenttwitter
-                                            operationId={operation.id}
-                                            timeSpent={operation.timeSpent}
-                                            setTasks={setTasksTwitter}
-                                            setTimeSpentId={setTimeSpentId}
-
-                                        />
-                                    ) : (
-                                        <>
-                                            {task.status === 'open' && (
-                                                <button onClick={() => setTimeSpentId(operation.id)}>Add Spent Time</button>
-                                            )}
-                                        </>
-                                    )}
-                                    {task.status === 'open' && (
-                                        <button
-                                        onClick={() => handleDeleteTwitterOperation(operation.id)}
-                                        data-operationid={operation.id}
-                                        >Delete</button>
-                                        )}
-                                        </div>
-                                        ))}
-                                </div>
-                                </div>
-                                ))}
-                        </section>
-                    </>
-                )
-                }
-
-                export default Twitter
+export default Twitter

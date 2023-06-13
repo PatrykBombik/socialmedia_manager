@@ -17,7 +17,7 @@
     {
       "title": "test1",
       "description": "test1",
-      "status": "closed",
+      "status": "open",
       "addedDate": "2023-06-13T10:16:36.009Z",
       "id": 3
     }
@@ -38,6 +38,13 @@
       "status": "open",
       "addedDate": "2023-06-05",
       "timeSpent": "0h 0m"
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "status": "open",
+      "addedDate": "2023-06-13T11:11:18.320Z",
+      "id": 3
     }
   ],
   "Instagram": [
@@ -56,6 +63,20 @@
       "status": "open",
       "addedDate": "2023-06-05",
       "timeSpent": "0h 0m"
+    },
+    {
+      "title": "rsa",
+      "description": "",
+      "status": "open",
+      "addedDate": "2023-06-13T11:09:59.513Z",
+      "id": 3
+    },
+    {
+      "title": "sdf",
+      "description": "sdf",
+      "status": "open",
+      "addedDate": "2023-06-13T11:10:51.100Z",
+      "id": 4
     }
   ],
   "Snapchat": [
@@ -74,22 +95,22 @@
       "status": "open",
       "addedDate": "2023-06-05",
       "timeSpent": "0h 0m"
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "status": "open",
+      "addedDate": "2023-06-13T11:11:34.730Z",
+      "id": 3
     }
   ],
   "operations": [
     {
-      "description": "asd",
-      "timeSpent": 3,
-      "addedDate": "2023-06-13T10:16:39.483Z",
-      "taskId": 3,
-      "id": 1
-    },
-    {
-      "description": "asdad",
-      "timeSpent": 5,
-      "addedDate": "2023-06-13T10:16:41.810Z",
-      "taskId": 3,
-      "id": 2
+      "description": "vxcx",
+      "timeSpent": 0,
+      "addedDate": "2023-06-13T11:11:04.059Z",
+      "taskId": 4,
+      "id": 4
     }
   ]
 }

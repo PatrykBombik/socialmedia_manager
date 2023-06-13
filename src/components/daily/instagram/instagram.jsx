@@ -1,57 +1,57 @@
 import {useEffect, useState} from "react";
 import {deleteDataAPI, getDataAPI, sendDataAPI, updateDataAPI} from "../../../helpers/api.jsx";
 import Button from "@mui/material/Button";
-import AddRedditOperations from "./addoperationsreddit.jsx";
-import Addtimespentreddit from "./addtimespentreddit.jsx";
+import AddInstagramOperations from "./addoperationsinstagram.jsx";
+import Addtimespentinstagram from "./addtimespentinstagram.jsx";
 
-function Reddit() {
+function Instagram() {
 
-    const [tasksReddit, setTasksReddit] = useState([]);
-    const [titleReddit, setTittleReddit] = useState('');
-    const [descReddit, setDescReddit] = useState('');
-    const [operationRedditId, setOperationRedditId] = useState(null);
+    const [tasksInstagram, setTasksInstagram] = useState([]);
+    const [titleInstagram, setTittleInstagram] = useState('');
+    const [descInstagram, setDescInstagram] = useState('');
+    const [operationInstagramId, setOperationInstagramId] = useState(null);
     const [timeSpentID, setTimeSpentId] = useState(null);
 
     useEffect(() => {
-        const data = Promise.all([getDataAPI("Reddit"), getDataAPI("operations")])
+        const data = Promise.all([getDataAPI("Instagram"), getDataAPI("operations")])
 
         data
             .then((results) => {
-                const [taskRedditData, operationRedditData] = results;
-                const taskReddit = taskRedditData.map((task) => ({
-                    ...task, operations: operationRedditData.filter((operation) => operation.taskId === task.id)
+                const [taskInstagramData, operationInstagramData] = results;
+                const taskInstagram = taskInstagramData.map((task) => ({
+                    ...task, operations: operationInstagramData.filter((operation) => operation.taskId === task.id)
                 }))
 
-                setTasksReddit(taskReddit);
+                setTasksInstagram(taskInstagram);
             })
             .catch(console.error)
     }, [])
 
-    async function handleRedditSubmit(event) {
+    async function handleInstagramSubmit(event) {
         event.preventDefault();
         const result = await sendDataAPI({
-            title: titleReddit, description: descReddit, status: 'open', addedDate: new Date()
-        }, "Reddit");
+            title: titleInstagram, description: descInstagram, status: 'open', addedDate: new Date()
+        }, "Instagram");
 
-        setTittleReddit('');
-        setDescReddit('');
-        setTasksReddit([...tasksReddit, result])
+        setTittleInstagram('');
+        setDescInstagram('');
+        setTasksInstagram([...tasksInstagram, result])
     }
 
-    async function handleRedditDelete(id) {
-        const task = tasksReddit.find((task) => task.id === id);
+    async function handleInstagramDelete(id) {
+        const task = tasksInstagram.find((task) => task.id === id);
 
         for (const operation of task.operations) {
             await deleteDataAPI('operations', operation.id)
         }
 
-        await deleteDataAPI("Reddit", id);
-        setTasksReddit(tasksReddit.filter((task) => task.id !== id));
+        await deleteDataAPI("Instagram", id);
+        setTasksInstagram(tasksInstagram.filter((task) => task.id !== id));
     }
 
-    async function handleDeleteRedditOperation(id) {
+    async function handleDeleteInstagramOperation(id) {
         await deleteDataAPI("operations", id);
-        setTasksReddit(tasksReddit.map((task) => {
+        setTasksInstagram(tasksInstagram.map((task) => {
             return {
                 ...task,
                 operations: task.operations.filter((operation) => operation.id !== id)
@@ -64,11 +64,11 @@ function Reddit() {
             await updateDataAPI({
                     status: 'closed'
                 },
-                'Reddit',
+                'Instagram',
                 id,
                 'PATCH'
             );
-            setTasksReddit(tasksReddit.map((task) => ({
+            setTasksInstagram(tasksInstagram.map((task) => ({
                 ...task,
                 status: task.id === id ? 'closed' : task.status
             })))
@@ -79,11 +79,11 @@ function Reddit() {
             await updateDataAPI({
                     status: 'open'
                 },
-                'Reddit',
+                'Instagram',
                 id,
                 'PATCH'
             );
-            setTasksReddit(tasksReddit.map((task) => ({
+            setTasksInstagram(tasksInstagram.map((task) => ({
                 ...task,
                 status: task.id === id ? 'open' : task.status
             })))
@@ -92,16 +92,16 @@ function Reddit() {
 
     return (
         <>
-            <h1>Reddit</h1>
-            <form onSubmit={handleRedditSubmit}>
+            <h1>Instagram</h1>
+            <form onSubmit={handleInstagramSubmit}>
                 <div>
                     <label htmlFor="title">Nazwa zadania</label>
                     <input
-                        value={titleReddit}
+                        value={titleInstagram}
                         type="text"
                         id="title"
                         name="title"
-                        onChange={(event) => setTittleReddit(event.target.value)}
+                        onChange={(event) => setTittleInstagram(event.target.value)}
                     />
                 </div>
                 <div>
@@ -109,25 +109,25 @@ function Reddit() {
                     <textarea
                         id="desc"
                         name="desc"
-                        value={descReddit}
-                        onChange={(event) => setDescReddit(event.target.value)}
+                        value={descInstagram}
+                        onChange={(event) => setDescInstagram(event.target.value)}
                     />
                 </div>
-                <Button variant="contained" onClick={handleRedditSubmit}>Add</Button>
+                <Button variant="contained" onClick={handleInstagramSubmit}>Add</Button>
             </form>
             <section>
-                {tasksReddit.map((task) => (
+                {tasksInstagram.map((task) => (
                     <div key={task.id}>
                         <strong>{task.title}</strong> <span> - {task.description}</span>
-                        {operationRedditId === task.id ? (
-                            <AddRedditOperations
-                                setTasksReddit={setTasksReddit}
-                                setOperationRedditId={setOperationRedditId}
+                        {operationInstagramId === task.id ? (
+                            <AddInstagramOperations
+                                setTasksInstagram={setTasksInstagram}
+                                setOperationInstagramId={setOperationInstagramId}
                                 taskId={task.id}
                             />
                         ) : (
                             <>
-                                {task.status === 'open' && (<button onClick={() => setOperationRedditId(task.id)}>
+                                {task.status === 'open' && (<button onClick={() => setOperationInstagramId(task.id)}>
                                     Add operation
                                 </button>)}
                             </>
@@ -139,7 +139,7 @@ function Reddit() {
                             <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
                         )}
                         <button
-                            onClick={() => handleRedditDelete(task.id)}
+                            onClick={() => handleInstagramDelete(task.id)}
                             data-id={task.id}
                         >Delete
                         </button>
@@ -152,10 +152,10 @@ function Reddit() {
                                         <strong>{~~(operation.timeSpent / 60)}h {operation.timeSpent % 60}m</strong>
                                     )}
                                     {operation.id === timeSpentID ? (
-                                        <Addtimespentreddit
+                                        <Addtimespentinstagram
                                             operationId={operation.id}
                                             timeSpent={operation.timeSpent}
-                                            setTasks={setTasksReddit}
+                                            setTasks={setTasksInstagram}
                                             setTimeSpentId={setTimeSpentId}
 
                                         />
@@ -168,7 +168,7 @@ function Reddit() {
                                     )}
                                     {task.status === 'open' && (
                                         <button
-                                            onClick={() => handleDeleteRedditOperation(operation.id)}
+                                            onClick={() => handleDeleteInstagramOperation(operation.id)}
                                             data-operationid={operation.id}
                                         >Delete</button>
                                     )}
@@ -182,4 +182,4 @@ function Reddit() {
     )
 }
 
-export default Reddit
+export default Instagram

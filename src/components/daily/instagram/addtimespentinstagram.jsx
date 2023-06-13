@@ -2,7 +2,7 @@ import {useState} from "react";
 import {updateDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function Addtimespentreddit({operationId, timeSpent, setTasks, setTimeSpentId}) {
+function Addtimespentinstagram({operationId, timeSpent, setTasks, setTimeSpentId}) {
     const [value, setValue] = useState(0);
 
 
@@ -44,7 +44,7 @@ function Addtimespentreddit({operationId, timeSpent, setTasks, setTimeSpentId}) 
     );
 }
 
-Addtimespentreddit.propTypes = {
+Addtimespentinstagram.propTypes = {
     operationId: PropTypes.number,
     timeSpent: PropTypes.number,
     setTasks: PropTypes.func,
@@ -52,4 +52,4 @@ Addtimespentreddit.propTypes = {
 
 }
 
-export default Addtimespentreddit;
+export default Addtimespentinstagram;

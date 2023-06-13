@@ -1,22 +1,10 @@
 import {Container, Grid} from "@mui/material";
-import {useEffect, useState} from "react";
-import {deleteDataAPI, getDataAPI, sendDataAPI} from "../../helpers/api.jsx";
 import Twitter from "./twitter/twitter.jsx";
+import Instagram from "./instagram/instagram.jsx";
+import Reddit from "./reddit/reddit.jsx";
+import Snapchat from "./snapchat/snapchat.jsx";
 
 export default function Daily() {
-
-    const [tasksSnapchat, setTasksSnapchat] = useState([]);
-    const [titleSnapchat, setTittleSnapchat] = useState('');
-    const [descSnapchat, setDescSnapchat] = useState('');
-
-    useEffect(() => {
-        getDataAPI("Snapchat")
-            .then((data) => {
-                setTasksSnapchat(data)
-            })
-            .catch(console.error)
-    }, [])
-
 
     return (<>
         <Container maxWidth="xl" style={{marginTop: "10%"}}>
@@ -24,13 +12,13 @@ export default function Daily() {
                <Twitter/>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-                <h1>Reddit</h1>
+                <Instagram/>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-                <h1>Instagram</h1>
+                <Reddit/>
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
-                <h1>Snapchat</h1>
+                <Snapchat/>
             </Grid>
         </Container>
     </>)
