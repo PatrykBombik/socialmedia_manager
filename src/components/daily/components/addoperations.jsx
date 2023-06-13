@@ -1,6 +1,10 @@
 import {useState} from "react";
 import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
+import {ListItemIcon, TextField} from "@mui/material";
+import Button from "@mui/material/Button";
+import AddRoundedIcon from "@mui/icons-material/AddRounded.js";
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 
 function  AddOperations({taskId, setOperationId, setTasks}) {
     const [value, setValue] = useState('');
@@ -28,14 +32,21 @@ function  AddOperations({taskId, setOperationId, setTasks}) {
 
         return (
             <>
-                <input
+                <TextField
+                    id="outlined-basic"
+                    label="Dodaj zadanie"
+                    variant="outlined"
                     type="text"
                     value={value}
                     onChange={(event) => setValue(event.target.value)}
                     placeholder="Opis zadania"
                 />
-                <button onClick={handleAddOperation}>Confirm</button>
-                <button onClick={() => setOperationId(null)}>Cancel</button>
+                <Button onClick={handleAddOperation}>
+                    <ListItemIcon><AddRoundedIcon/>Dodaj</ListItemIcon>
+                </Button>
+                <Button onClick={() => setOperationId(null)}>
+                    <ListItemIcon><CancelRoundedIcon/>Anuluj</ListItemIcon>
+                </Button>
             </>
         );
     }

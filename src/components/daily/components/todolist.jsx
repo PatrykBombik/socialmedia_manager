@@ -17,7 +17,13 @@ import {
     TextField
 } from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 
 function Todolist() {
 
@@ -231,7 +237,7 @@ function Todolist() {
                                 >
                                     <ListItemButton onClick={() => {}}>
                                         <ListItemIcon>
-                                            <InboxIcon />
+                                            <TaskAltRoundedIcon />
                                         </ListItemIcon>
                                         <ListItemText primary={task.title} secondary={task.description}/>
                                         <ButtonGroup variant="text" aria-label="text button group">
@@ -245,22 +251,27 @@ function Todolist() {
                                                 <>
                                                     {task.status === "open" && (
                                                         <Button onClick={() => setOperationId(task.id)}>
-                                                            Dodaj zadanie
+                                                            <ListItemIcon><AddRoundedIcon/>Dodaj zadanie</ListItemIcon>
                                                         </Button>
                                                     )}
                                                 </>
                                             )}
                                             <Button onClick={() => handleEditTask(task.id)} data-id={task.id}>
-                                                Edit
+                                                <ListItemIcon><EditRoundedIcon/>Edytuj</ListItemIcon>
                                             </Button>
                                             {task.status === "open" && (
-                                                <Button onClick={handleFinishTask(task.id)}>Finish</Button>
+                                                <Button onClick={handleFinishTask(task.id)}>
+                                                    <ListItemIcon><DoneRoundedIcon/>Finish</ListItemIcon>
+
+                                                </Button>
                                             )}
                                             {task.status === "closed" && (
-                                                <Button onClick={handleUndoFinishTask(task.id)}>Cofnij</Button>
+                                                <Button onClick={handleUndoFinishTask(task.id)}>
+                                                    <ListItemIcon><ReplayRoundedIcon/>Cofnij</ListItemIcon>
+                                                </Button>
                                             )}
                                             <Button onClick={() => handleDelete(task.id)} data-id={task.id}>
-                                                Delete
+                                                <ListItemIcon><DeleteForeverRoundedIcon/>Delete</ListItemIcon>
                                             </Button>
                                         </ButtonGroup>
                                         {open ? <ExpandLess /> : <ExpandMore />}
@@ -355,7 +366,7 @@ function Todolist() {
                                             value={editingDesc}
                                             onChange={(event) => setEditingDesc(event.target.value)}
                                         />
-                                        <button type="submit">Save</button>
+                                        <Button type="submit"><ListItemIcon><SaveRoundedIcon/>Save</ListItemIcon></Button>
                                     </form>
                                 ) : (
                                     <>
