@@ -2,10 +2,10 @@ import {useState} from "react";
 import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function  AddInstagramOperations({taskId, setOperationInstagramId, setTasksInstagram}) {
+function  AddInstagramOperations({taskId, setOperationId, setTasks}) {
     const [value, setValue] = useState('');
 
-    async function handleAddInstagramOperation() {
+    async function handleAddOperation() {
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
@@ -14,14 +14,14 @@ function  AddInstagramOperations({taskId, setOperationInstagramId, setTasksInsta
                 taskId
             }, 'operations');
 
-            setTasksInstagram((prev) =>
+            setTasks((prev) =>
                 prev.map((task) => {
                     if (task.id !== taskId) return task;
                     const operations = task.operations ?? [];
                     task.operations = [...operations, data]
                     return task
                 }))
-            setOperationInstagramId(null);
+            setOperationId(null);
         }
     }
 
@@ -34,8 +34,8 @@ function  AddInstagramOperations({taskId, setOperationInstagramId, setTasksInsta
                 onChange={(event) => setValue(event.target.value)}
                 placeholder="Opis zadania"
             />
-            <button onClick={handleAddInstagramOperation}>Confirm</button>
-            <button onClick={() => setOperationInstagramId(null)}>Cancel</button>
+            <button onClick={handleAddOperation}>Confirm</button>
+            <button onClick={() => setOperationId(null)}>Cancel</button>
         </>
     );
 }
@@ -43,7 +43,7 @@ function  AddInstagramOperations({taskId, setOperationInstagramId, setTasksInsta
 
 AddInstagramOperations.propTypes = {
     taskId: PropTypes.number,
-    setOperationInstagramId: PropTypes.func,
-    setTasksInstagram: PropTypes.func
+    setOperationId: PropTypes.func,
+    setTasks: PropTypes.func
 };
 export default AddInstagramOperations

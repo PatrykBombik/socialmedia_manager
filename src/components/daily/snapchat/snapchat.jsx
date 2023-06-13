@@ -6,10 +6,10 @@ import Addtimespentsnapchat from "./addtimespentsnapchat.jsx";
 
 function Snapchat() {
 
-    const [tasksSnapchat, setTasksSnapchat] = useState([]);
-    const [titleSnapchat, setTittleSnapchat] = useState('');
-    const [descSnapchat, setDescSnapchat] = useState('');
-    const [operationSnapchatId, setOperationSnapchatId] = useState(null);
+    const [tasks, setTasks] = useState([]);
+    const [title, setTittle] = useState('');
+    const [desc, setDesc] = useState('');
+    const [operationId, setOperationId] = useState(null);
     const [timeSpentID, setTimeSpentId] = useState(null);
 
     useEffect(() => {
@@ -17,41 +17,41 @@ function Snapchat() {
 
         data
             .then((results) => {
-                const [taskSnapchatData, operationSnapchatData] = results;
-                const taskSnapchat = taskSnapchatData.map((task) => ({
-                    ...task, operations: operationSnapchatData.filter((operation) => operation.taskId === task.id)
+                const [taskData, operationData] = results;
+                const task = taskData.map((task) => ({
+                    ...task, operations: operationData.filter((operation) => operation.taskId === task.id)
                 }))
 
-                setTasksSnapchat(taskSnapchat);
+                setTasks(task);
             })
             .catch(console.error)
     }, [])
 
-    async function handleSnapchatSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         const result = await sendDataAPI({
-            title: titleSnapchat, description: descSnapchat, status: 'open', addedDate: new Date()
+            title: title, description: desc, status: 'open', addedDate: new Date()
         }, "Snapchat");
 
-        setTittleSnapchat('');
-        setDescSnapchat('');
-        setTasksSnapchat([...tasksSnapchat, result])
+        setTittle('');
+        setDesc('');
+        setTasks([...tasks, result])
     }
 
-    async function handleSnapchatDelete(id) {
-        const task = tasksSnapchat.find((task) => task.id === id);
+    async function handleDelete(id) {
+        const task = tasks.find((task) => task.id === id);
 
         for (const operation of task.operations) {
             await deleteDataAPI('operations', operation.id)
         }
 
         await deleteDataAPI("Snapchat", id);
-        setTasksSnapchat(tasksSnapchat.filter((task) => task.id !== id));
+        setTasks(tasks.filter((task) => task.id !== id));
     }
 
-    async function handleDeleteSnapchatOperation(id) {
+    async function handleDeleteOperation(id) {
         await deleteDataAPI("operations", id);
-        setTasksSnapchat(tasksSnapchat.map((task) => {
+        setTasks(tasks.map((task) => {
             return {
                 ...task,
                 operations: task.operations.filter((operation) => operation.id !== id)
@@ -68,7 +68,7 @@ function Snapchat() {
                 id,
                 'PATCH'
             );
-            setTasksSnapchat(tasksSnapchat.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'closed' : task.status
             })))
@@ -84,25 +84,26 @@ function Snapchat() {
                 id,
                 'PATCH'
             );
-            setTasksSnapchat(tasksSnapchat.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'open' : task.status
             })))
         };
     }
 
+
     return (
         <>
             <h1>Snapchat</h1>
-            <form onSubmit={handleSnapchatSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Nazwa zadania</label>
                     <input
-                        value={titleSnapchat}
+                        value={title}
                         type="text"
                         id="title"
                         name="title"
-                        onChange={(event) => setTittleSnapchat(event.target.value)}
+                        onChange={(event) => setTittle(event.target.value)}
                     />
                 </div>
                 <div>
@@ -110,25 +111,25 @@ function Snapchat() {
                     <textarea
                         id="desc"
                         name="desc"
-                        value={descSnapchat}
-                        onChange={(event) => setDescSnapchat(event.target.value)}
+                        value={desc}
+                        onChange={(event) => setDesc(event.target.value)}
                     />
                 </div>
-                <Button variant="contained" onClick={handleSnapchatSubmit}>Add</Button>
+                <Button variant="contained" onClick={handleSubmit}>Add</Button>
             </form>
             <section>
-                {tasksSnapchat.map((task) => (
+                {tasks.map((task) => (
                     <div key={task.id}>
                         <strong>{task.title}</strong> <span> - {task.description}</span>
-                        {operationSnapchatId === task.id ? (
+                        {operationId === task.id ? (
                             <AddSnapchatOperations
-                                setTasksSnapchat={setTasksSnapchat}
-                                setOperationSnapchatId={setOperationSnapchatId}
+                                setTasks={setTasks}
+                                setOperationId={setOperationId}
                                 taskId={task.id}
                             />
                         ) : (
                             <>
-                                {task.status === 'open' && (<button onClick={() => setOperationSnapchatId(task.id)}>
+                                {task.status === 'open' && (<button onClick={() => setOperationId(task.id)}>
                                     Add operation
                                 </button>)}
                             </>
@@ -140,7 +141,7 @@ function Snapchat() {
                             <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
                         )}
                         <button
-                            onClick={() => handleSnapchatDelete(task.id)}
+                            onClick={() => handleDelete(task.id)}
                             data-id={task.id}
                         >Delete
                         </button>
@@ -156,7 +157,7 @@ function Snapchat() {
                                         <Addtimespentsnapchat
                                             operationId={operation.id}
                                             timeSpent={operation.timeSpent}
-                                            setTasks={setTasksSnapchat}
+                                            setTasks={setTasks}
                                             setTimeSpentId={setTimeSpentId}
 
                                         />
@@ -169,7 +170,7 @@ function Snapchat() {
                                     )}
                                     {task.status === 'open' && (
                                         <button
-                                            onClick={() => handleDeleteSnapchatOperation(operation.id)}
+                                            onClick={() => handleDeleteOperation(operation.id)}
                                             data-operationid={operation.id}
                                         >Delete</button>
                                     )}

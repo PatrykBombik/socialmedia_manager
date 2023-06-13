@@ -4,12 +4,13 @@ import Button from "@mui/material/Button";
 import AddInstagramOperations from "./addoperationsinstagram.jsx";
 import Addtimespentinstagram from "./addtimespentinstagram.jsx";
 
+
 function Instagram() {
 
-    const [tasksInstagram, setTasksInstagram] = useState([]);
-    const [titleInstagram, setTittleInstagram] = useState('');
-    const [descInstagram, setDescInstagram] = useState('');
-    const [operationInstagramId, setOperationInstagramId] = useState(null);
+    const [tasks, setTasks] = useState([]);
+    const [title, setTittle] = useState('');
+    const [desc, setDesc] = useState('');
+    const [operationId, setOperationId] = useState(null);
     const [timeSpentID, setTimeSpentId] = useState(null);
 
     useEffect(() => {
@@ -17,41 +18,41 @@ function Instagram() {
 
         data
             .then((results) => {
-                const [taskInstagramData, operationInstagramData] = results;
-                const taskInstagram = taskInstagramData.map((task) => ({
-                    ...task, operations: operationInstagramData.filter((operation) => operation.taskId === task.id)
+                const [taskData, operationData] = results;
+                const task = taskData.map((task) => ({
+                    ...task, operations: operationData.filter((operation) => operation.taskId === task.id)
                 }))
 
-                setTasksInstagram(taskInstagram);
+                setTasks(task);
             })
             .catch(console.error)
     }, [])
 
-    async function handleInstagramSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         const result = await sendDataAPI({
-            title: titleInstagram, description: descInstagram, status: 'open', addedDate: new Date()
+            title: title, description: desc, status: 'open', addedDate: new Date()
         }, "Instagram");
 
-        setTittleInstagram('');
-        setDescInstagram('');
-        setTasksInstagram([...tasksInstagram, result])
+        setTittle('');
+        setDesc('');
+        setTasks([...tasks, result])
     }
 
-    async function handleInstagramDelete(id) {
-        const task = tasksInstagram.find((task) => task.id === id);
+    async function handleDelete(id) {
+        const task = tasks.find((task) => task.id === id);
 
         for (const operation of task.operations) {
             await deleteDataAPI('operations', operation.id)
         }
 
         await deleteDataAPI("Instagram", id);
-        setTasksInstagram(tasksInstagram.filter((task) => task.id !== id));
+        setTasks(tasks.filter((task) => task.id !== id));
     }
 
-    async function handleDeleteInstagramOperation(id) {
+    async function handleDeleteOperation(id) {
         await deleteDataAPI("operations", id);
-        setTasksInstagram(tasksInstagram.map((task) => {
+        setTasks(tasks.map((task) => {
             return {
                 ...task,
                 operations: task.operations.filter((operation) => operation.id !== id)
@@ -68,12 +69,13 @@ function Instagram() {
                 id,
                 'PATCH'
             );
-            setTasksInstagram(tasksInstagram.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'closed' : task.status
             })))
         };
     }
+
     function handleUndoFinishTask(id) {
         return async function () {
             await updateDataAPI({
@@ -83,25 +85,26 @@ function Instagram() {
                 id,
                 'PATCH'
             );
-            setTasksInstagram(tasksInstagram.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'open' : task.status
             })))
         };
     }
 
+
     return (
         <>
             <h1>Instagram</h1>
-            <form onSubmit={handleInstagramSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Nazwa zadania</label>
                     <input
-                        value={titleInstagram}
+                        value={title}
                         type="text"
                         id="title"
                         name="title"
-                        onChange={(event) => setTittleInstagram(event.target.value)}
+                        onChange={(event) => setTittle(event.target.value)}
                     />
                 </div>
                 <div>
@@ -109,25 +112,25 @@ function Instagram() {
                     <textarea
                         id="desc"
                         name="desc"
-                        value={descInstagram}
-                        onChange={(event) => setDescInstagram(event.target.value)}
+                        value={desc}
+                        onChange={(event) => setDesc(event.target.value)}
                     />
                 </div>
-                <Button variant="contained" onClick={handleInstagramSubmit}>Add</Button>
+                <Button variant="contained" onClick={handleSubmit}>Add</Button>
             </form>
             <section>
-                {tasksInstagram.map((task) => (
+                {tasks.map((task) => (
                     <div key={task.id}>
                         <strong>{task.title}</strong> <span> - {task.description}</span>
-                        {operationInstagramId === task.id ? (
+                        {operationId === task.id ? (
                             <AddInstagramOperations
-                                setTasksInstagram={setTasksInstagram}
-                                setOperationInstagramId={setOperationInstagramId}
+                                setTasks={setTasks}
+                                setOperationId={setOperationId}
                                 taskId={task.id}
                             />
                         ) : (
                             <>
-                                {task.status === 'open' && (<button onClick={() => setOperationInstagramId(task.id)}>
+                                {task.status === 'open' && (<button onClick={() => setOperationId(task.id)}>
                                     Add operation
                                 </button>)}
                             </>
@@ -139,7 +142,7 @@ function Instagram() {
                             <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
                         )}
                         <button
-                            onClick={() => handleInstagramDelete(task.id)}
+                            onClick={() => handleDelete(task.id)}
                             data-id={task.id}
                         >Delete
                         </button>
@@ -155,7 +158,7 @@ function Instagram() {
                                         <Addtimespentinstagram
                                             operationId={operation.id}
                                             timeSpent={operation.timeSpent}
-                                            setTasks={setTasksInstagram}
+                                            setTasks={setTasks}
                                             setTimeSpentId={setTimeSpentId}
 
                                         />
@@ -168,7 +171,7 @@ function Instagram() {
                                     )}
                                     {task.status === 'open' && (
                                         <button
-                                            onClick={() => handleDeleteInstagramOperation(operation.id)}
+                                            onClick={() => handleDeleteOperation(operation.id)}
                                             data-operationid={operation.id}
                                         >Delete</button>
                                     )}

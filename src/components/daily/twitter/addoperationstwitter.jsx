@@ -2,10 +2,10 @@ import {useState} from "react";
 import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter}) {
+function  AddTwitterOperations({taskId, setOperationId, setTasks}) {
     const [value, setValue] = useState('');
 
-    async function handleAddTwitterOperation() {
+    async function handleAddOperation() {
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
@@ -14,14 +14,14 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
                 taskId
             }, 'operations');
 
-            setTasksTwitter((prev) =>
+            setTasks((prev) =>
                 prev.map((task) => {
                     if (task.id !== taskId) return task;
                     const operations = task.operations ?? [];
                     task.operations = [...operations, data]
                     return task
                 }))
-            setOperationTwitterId(null);
+            setOperationId(null);
         }
     }
 
@@ -34,8 +34,8 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
                     onChange={(event) => setValue(event.target.value)}
                     placeholder="Opis zadania"
                 />
-                <button onClick={handleAddTwitterOperation}>Confirm</button>
-                <button onClick={() => setOperationTwitterId(null)}>Cancel</button>
+                <button onClick={handleAddOperation}>Confirm</button>
+                <button onClick={() => setOperationId(null)}>Cancel</button>
             </>
         );
     }
@@ -43,7 +43,7 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
 
 AddTwitterOperations.propTypes = {
     taskId: PropTypes.number,
-    setOperationTwitterId: PropTypes.func,
-    setTasksTwitter: PropTypes.func
+    setOperationId: PropTypes.func,
+    setTasks: PropTypes.func
 };
 export default AddTwitterOperations

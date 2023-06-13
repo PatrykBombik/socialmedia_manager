@@ -2,10 +2,10 @@ import {useState} from "react";
 import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function  AddRedditOperations({taskId, setOperationRedditId, setTasksReddit}) {
+function  AddRedditOperations({taskId, setOperationId, setTasks}) {
     const [value, setValue] = useState('');
 
-    async function handleAddRedditOperation() {
+    async function handleAddOperation() {
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
@@ -14,14 +14,14 @@ function  AddRedditOperations({taskId, setOperationRedditId, setTasksReddit}) {
                 taskId
             }, 'operations');
 
-            setTasksReddit((prev) =>
+            setTasks((prev) =>
                 prev.map((task) => {
                     if (task.id !== taskId) return task;
                     const operations = task.operations ?? [];
                     task.operations = [...operations, data]
                     return task
                 }))
-            setOperationRedditId(null);
+            setOperationId(null);
         }
     }
 
@@ -34,8 +34,8 @@ function  AddRedditOperations({taskId, setOperationRedditId, setTasksReddit}) {
                 onChange={(event) => setValue(event.target.value)}
                 placeholder="Opis zadania"
             />
-            <button onClick={handleAddRedditOperation}>Confirm</button>
-            <button onClick={() => setOperationRedditId(null)}>Cancel</button>
+            <button onClick={handleAddOperation}>Confirm</button>
+            <button onClick={() => setOperationId(null)}>Cancel</button>
         </>
     );
 }
@@ -43,7 +43,7 @@ function  AddRedditOperations({taskId, setOperationRedditId, setTasksReddit}) {
 
 AddRedditOperations.propTypes = {
     taskId: PropTypes.number,
-    setOperationRedditId: PropTypes.func,
-    setTasksReddit: PropTypes.func
+    setOperationId: PropTypes.func,
+    setTasks: PropTypes.func
 };
 export default AddRedditOperations

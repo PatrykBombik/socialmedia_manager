@@ -6,10 +6,10 @@ import Addtimespentreddit from "./addtimespentreddit.jsx";
 
 function Reddit() {
 
-    const [tasksReddit, setTasksReddit] = useState([]);
-    const [titleReddit, setTittleReddit] = useState('');
-    const [descReddit, setDescReddit] = useState('');
-    const [operationRedditId, setOperationRedditId] = useState(null);
+    const [tasks, setTasks] = useState([]);
+    const [title, setTittle] = useState('');
+    const [desc, setDesc] = useState('');
+    const [operationId, setOperationId] = useState(null);
     const [timeSpentID, setTimeSpentId] = useState(null);
 
     useEffect(() => {
@@ -17,41 +17,41 @@ function Reddit() {
 
         data
             .then((results) => {
-                const [taskRedditData, operationRedditData] = results;
-                const taskReddit = taskRedditData.map((task) => ({
-                    ...task, operations: operationRedditData.filter((operation) => operation.taskId === task.id)
+                const [taskData, operationData] = results;
+                const task = taskData.map((task) => ({
+                    ...task, operations: operationData.filter((operation) => operation.taskId === task.id)
                 }))
 
-                setTasksReddit(taskReddit);
+                setTasks(task);
             })
             .catch(console.error)
     }, [])
 
-    async function handleRedditSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         const result = await sendDataAPI({
-            title: titleReddit, description: descReddit, status: 'open', addedDate: new Date()
+            title: title, description: desc, status: 'open', addedDate: new Date()
         }, "Reddit");
 
-        setTittleReddit('');
-        setDescReddit('');
-        setTasksReddit([...tasksReddit, result])
+        setTittle('');
+        setDesc('');
+        setTasks([...tasks, result])
     }
 
-    async function handleRedditDelete(id) {
-        const task = tasksReddit.find((task) => task.id === id);
+    async function handleDelete(id) {
+        const task = tasks.find((task) => task.id === id);
 
         for (const operation of task.operations) {
             await deleteDataAPI('operations', operation.id)
         }
 
         await deleteDataAPI("Reddit", id);
-        setTasksReddit(tasksReddit.filter((task) => task.id !== id));
+        setTasks(tasks.filter((task) => task.id !== id));
     }
 
-    async function handleDeleteRedditOperation(id) {
+    async function handleDeleteOperation(id) {
         await deleteDataAPI("operations", id);
-        setTasksReddit(tasksReddit.map((task) => {
+        setTasks(tasks.map((task) => {
             return {
                 ...task,
                 operations: task.operations.filter((operation) => operation.id !== id)
@@ -68,12 +68,13 @@ function Reddit() {
                 id,
                 'PATCH'
             );
-            setTasksReddit(tasksReddit.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'closed' : task.status
             })))
         };
     }
+
     function handleUndoFinishTask(id) {
         return async function () {
             await updateDataAPI({
@@ -83,25 +84,26 @@ function Reddit() {
                 id,
                 'PATCH'
             );
-            setTasksReddit(tasksReddit.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'open' : task.status
             })))
         };
     }
 
+
     return (
         <>
             <h1>Reddit</h1>
-            <form onSubmit={handleRedditSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Nazwa zadania</label>
                     <input
-                        value={titleReddit}
+                        value={title}
                         type="text"
                         id="title"
                         name="title"
-                        onChange={(event) => setTittleReddit(event.target.value)}
+                        onChange={(event) => setTittle(event.target.value)}
                     />
                 </div>
                 <div>
@@ -109,25 +111,25 @@ function Reddit() {
                     <textarea
                         id="desc"
                         name="desc"
-                        value={descReddit}
-                        onChange={(event) => setDescReddit(event.target.value)}
+                        value={desc}
+                        onChange={(event) => setDesc(event.target.value)}
                     />
                 </div>
-                <Button variant="contained" onClick={handleRedditSubmit}>Add</Button>
+                <Button variant="contained" onClick={handleSubmit}>Add</Button>
             </form>
             <section>
-                {tasksReddit.map((task) => (
+                {tasks.map((task) => (
                     <div key={task.id}>
                         <strong>{task.title}</strong> <span> - {task.description}</span>
-                        {operationRedditId === task.id ? (
+                        {operationId === task.id ? (
                             <AddRedditOperations
-                                setTasksReddit={setTasksReddit}
-                                setOperationRedditId={setOperationRedditId}
+                                setTasks={setTasks}
+                                setOperationId={setOperationId}
                                 taskId={task.id}
                             />
                         ) : (
                             <>
-                                {task.status === 'open' && (<button onClick={() => setOperationRedditId(task.id)}>
+                                {task.status === 'open' && (<button onClick={() => setOperationId(task.id)}>
                                     Add operation
                                 </button>)}
                             </>
@@ -139,7 +141,7 @@ function Reddit() {
                             <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
                         )}
                         <button
-                            onClick={() => handleRedditDelete(task.id)}
+                            onClick={() => handleDelete(task.id)}
                             data-id={task.id}
                         >Delete
                         </button>
@@ -155,7 +157,7 @@ function Reddit() {
                                         <Addtimespentreddit
                                             operationId={operation.id}
                                             timeSpent={operation.timeSpent}
-                                            setTasks={setTasksReddit}
+                                            setTasks={setTasks}
                                             setTimeSpentId={setTimeSpentId}
 
                                         />
@@ -168,7 +170,7 @@ function Reddit() {
                                     )}
                                     {task.status === 'open' && (
                                         <button
-                                            onClick={() => handleDeleteRedditOperation(operation.id)}
+                                            onClick={() => handleDeleteOperation(operation.id)}
                                             data-operationid={operation.id}
                                         >Delete</button>
                                     )}

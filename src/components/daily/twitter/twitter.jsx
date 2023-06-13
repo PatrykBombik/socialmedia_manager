@@ -6,10 +6,10 @@ import Addtimespenttwitter from "./addtimespenttwitter.jsx";
 
 function Twitter() {
 
-    const [tasksTwitter, setTasksTwitter] = useState([]);
-    const [titleTwitter, setTittleTwitter] = useState('');
-    const [descTwitter, setDescTwitter] = useState('');
-    const [operationTwitterId, setOperationTwitterId] = useState(null);
+    const [tasks, setTasks] = useState([]);
+    const [title, setTittle] = useState('');
+    const [desc, setDesc] = useState('');
+    const [operationId, setOperationId] = useState(null);
     const [timeSpentID, setTimeSpentId] = useState(null);
 
     useEffect(() => {
@@ -17,41 +17,41 @@ function Twitter() {
 
         data
             .then((results) => {
-                const [taskTwitterData, operationTwitterData] = results;
-                const taskTwitter = taskTwitterData.map((task) => ({
-                    ...task, operations: operationTwitterData.filter((operation) => operation.taskId === task.id)
+                const [taskData, operationData] = results;
+                const task = taskData.map((task) => ({
+                    ...task, operations: operationData.filter((operation) => operation.taskId === task.id)
                 }))
 
-                setTasksTwitter(taskTwitter);
+                setTasks(task);
             })
             .catch(console.error)
     }, [])
 
-    async function handleTwitterSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         const result = await sendDataAPI({
-            title: titleTwitter, description: descTwitter, status: 'open', addedDate: new Date()
+            title: title, description: desc, status: 'open', addedDate: new Date()
         }, "Twitter");
 
-        setTittleTwitter('');
-        setDescTwitter('');
-        setTasksTwitter([...tasksTwitter, result])
+        setTittle('');
+        setDesc('');
+        setTasks([...tasks, result])
     }
 
-    async function handleTwitterDelete(id) {
-        const task = tasksTwitter.find((task) => task.id === id);
+    async function handleDelete(id) {
+        const task = tasks.find((task) => task.id === id);
 
         for (const operation of task.operations) {
             await deleteDataAPI('operations', operation.id)
         }
 
         await deleteDataAPI("Twitter", id);
-        setTasksTwitter(tasksTwitter.filter((task) => task.id !== id));
+        setTasks(tasks.filter((task) => task.id !== id));
     }
 
-    async function handleDeleteTwitterOperation(id) {
+    async function handleDeleteOperation(id) {
         await deleteDataAPI("operations", id);
-        setTasksTwitter(tasksTwitter.map((task) => {
+        setTasks(tasks.map((task) => {
             return {
                 ...task,
                 operations: task.operations.filter((operation) => operation.id !== id)
@@ -68,7 +68,7 @@ function Twitter() {
                 id,
                 'PATCH'
             );
-            setTasksTwitter(tasksTwitter.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'closed' : task.status
             })))
@@ -84,7 +84,7 @@ function Twitter() {
                 id,
                 'PATCH'
             );
-            setTasksTwitter(tasksTwitter.map((task) => ({
+            setTasks(tasks.map((task) => ({
                 ...task,
                 status: task.id === id ? 'open' : task.status
             })))
@@ -95,15 +95,15 @@ function Twitter() {
     return (
         <>
         <h1>Twitter</h1>
-        <form onSubmit={handleTwitterSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="title">Nazwa zadania</label>
                 <input
-                    value={titleTwitter}
+                    value={title}
                     type="text"
                     id="title"
                     name="title"
-                    onChange={(event) => setTittleTwitter(event.target.value)}
+                    onChange={(event) => setTittle(event.target.value)}
                 />
             </div>
             <div>
@@ -111,25 +111,25 @@ function Twitter() {
                 <textarea
                     id="desc"
                     name="desc"
-                    value={descTwitter}
-                    onChange={(event) => setDescTwitter(event.target.value)}
+                    value={desc}
+                    onChange={(event) => setDesc(event.target.value)}
                 />
             </div>
-            <Button variant="contained" onClick={handleTwitterSubmit}>Add</Button>
+            <Button variant="contained" onClick={handleSubmit}>Add</Button>
         </form>
         <section>
-            {tasksTwitter.map((task) => (
+            {tasks.map((task) => (
                 <div key={task.id}>
                     <strong>{task.title}</strong> <span> - {task.description}</span>
-                    {operationTwitterId === task.id ? (
+                    {operationId === task.id ? (
                         <AddTwitterOperations
-                            setTasksTwitter={setTasksTwitter}
-                            setOperationTwitterId={setOperationTwitterId}
+                            setTasks={setTasks}
+                            setOperationId={setOperationId}
                             taskId={task.id}
                         />
                     ) : (
                         <>
-                            {task.status === 'open' && (<button onClick={() => setOperationTwitterId(task.id)}>
+                            {task.status === 'open' && (<button onClick={() => setOperationId(task.id)}>
                                 Add operation
                             </button>)}
                         </>
@@ -141,7 +141,7 @@ function Twitter() {
                     <button onClick={handleUndoFinishTask(task.id)}>Cofnij</button>
                     )}
             <button
-                onClick={() => handleTwitterDelete(task.id)}
+                onClick={() => handleDelete(task.id)}
                 data-id={task.id}
             >Delete
             </button>
@@ -157,7 +157,7 @@ function Twitter() {
                             <Addtimespenttwitter
                                 operationId={operation.id}
                                 timeSpent={operation.timeSpent}
-                                setTasks={setTasksTwitter}
+                                setTasks={setTasks}
                                 setTimeSpentId={setTimeSpentId}
 
                             />
@@ -170,7 +170,7 @@ function Twitter() {
                         )}
                         {task.status === 'open' && (
                             <button
-                                onClick={() => handleDeleteTwitterOperation(operation.id)}
+                                onClick={() => handleDeleteOperation(operation.id)}
                                 data-operationid={operation.id}
                             >Delete</button>
                         )}
