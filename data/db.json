@@ -15,10 +15,10 @@
       "addedDate": "2023-06-05"
     },
     {
-      "title": "test",
-      "description": "test",
-      "status": "open",
-      "addedDate": "2023-06-13T08:10:29.772Z",
+      "title": "test1",
+      "description": "test1",
+      "status": "closed",
+      "addedDate": "2023-06-13T10:16:36.009Z",
       "id": 3
     }
   ],
@@ -78,25 +78,18 @@
   ],
   "operations": [
     {
-      "description": "test1",
-      "timeSpent": "0",
-      "addedDate": "2023-06-13T08:10:34.712Z",
+      "description": "asd",
+      "timeSpent": 3,
+      "addedDate": "2023-06-13T10:16:39.483Z",
       "taskId": 3,
       "id": 1
     },
     {
-      "description": "test2",
-      "timeSpent": "0",
-      "addedDate": "2023-06-13T08:10:37.503Z",
+      "description": "asdad",
+      "timeSpent": 5,
+      "addedDate": "2023-06-13T10:16:41.810Z",
       "taskId": 3,
       "id": 2
-    },
-    {
-      "description": "test3",
-      "timeSpent": "0",
-      "addedDate": "2023-06-13T08:11:51.114Z",
-      "taskId": 3,
-      "id": 3
     }
   ]
 }

@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {deleteDataAPI, getDataAPI, sendDataAPI} from "../../helpers/api.jsx";
+import {deleteDataAPI, getDataAPI, sendDataAPI, updateDataAPI} from "../../../helpers/api.jsx";
 import Button from "@mui/material/Button";
-import AddTwitterOperations from "./addoperations.jsx";
-import Addtimespent from "./addtimespent.jsx";
+import AddTwitterOperations from "./addoperationstwitter.jsx";
+import Addtimespenttwitter from "./addtimespenttwitter.jsx";
 
 function Twitter() {
 
@@ -39,18 +39,40 @@ function Twitter() {
     }
 
     async function handleTwitterDelete(id) {
+        const task = tasksTwitter.find((task) => task.id === id);
+
+        for (const operation of task.operations) {
+            await deleteDataAPI('operations', operation.id)
+        }
+
         await deleteDataAPI("Twitter", id);
-        setTasksTwitter(tasksTwitter.filter((task) => task.id !== id))
+        setTasksTwitter(tasksTwitter.filter((task) => task.id !== id));
     }
 
     async function handleDeleteTwitterOperation(id) {
         await deleteDataAPI("operations", id);
         setTasksTwitter(tasksTwitter.map((task) => {
-           return {
-               ...task,
-               operations: task.operations.filter((operation) => operation.id !== id)
-           }
+            return {
+                ...task,
+                operations: task.operations.filter((operation) => operation.id !== id)
+            }
         }))
+    }
+
+    function handleFinishTask(id) {
+        return async function () {
+            await updateDataAPI({
+                    status: 'closed'
+                },
+                'Twitter',
+                id,
+                'PATCH'
+            );
+            setTasksTwitter(tasksTwitter.map((task) => ({
+                ...task,
+                status: task.id === id ? 'closed' : task.status
+            })))
+        };
     }
 
     return (
@@ -89,22 +111,30 @@ function Twitter() {
                                 taskId={task.id}
                             />
                         ) : (
-                            <button onClick={() => setOperationTwitterId(task.id)}>
-                                Add operation
-                            </button>
+                            <>
+                                {task.status === 'open' && (<button onClick={() => setOperationTwitterId(task.id)}>
+                                    Add operation
+                                </button>)}
+                            </>
                         )}
-                        <button>Finish</button>
+                        {task.status === 'open' && (
+                            <button onClick={handleFinishTask(task.id)}>Finish</button>
+                        )}
                         <button
                             onClick={() => handleTwitterDelete(task.id)}
                             data-id={task.id}
-                        >Delete</button>
+                        >Delete
+                        </button>
 
                         <div>
                             {task.operations && task.operations.map((operation) => (
                                 <div key={operation.id}>
-                                    <span>{operation.description} :</span><strong>{operation.timeSpent}</strong>
+                                    <span>{operation.description} :</span>
+                                    {operation.timeSpent !== 0 && (
+                                    <strong>{~~(operation.timeSpent / 60)}h {operation.timeSpent % 60}m</strong>
+                                    )}
                                     {operation.id === timeSpentID ? (
-                                        <Addtimespent
+                                        <Addtimespenttwitter
                                             operationId={operation.id}
                                             timeSpent={operation.timeSpent}
                                             setTasks={setTasksTwitter}
@@ -112,20 +142,26 @@ function Twitter() {
 
                                         />
                                     ) : (
-                                        <button onClick={() => setTimeSpentId(operation.id)}>Add Spent Time</button>
+                                        <>
+                                            {task.status === 'open' && (
+                                                <button onClick={() => setTimeSpentId(operation.id)}>Add Spent Time</button>
+                                            )}
+                                        </>
                                     )}
-                                    <button
+                                    {task.status === 'open' && (
+                                        <button
                                         onClick={() => handleDeleteTwitterOperation(operation.id)}
                                         data-operationid={operation.id}
-                                    >Delete</button>
+                                        >Delete</button>
+                                        )}
+                                        </div>
+                                        ))}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </section>
-        </>
-    )
-}
+                                </div>
+                                ))}
+                        </section>
+                    </>
+                )
+                }
 
-export default Twitter
+                export default Twitter

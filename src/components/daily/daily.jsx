@@ -1,33 +1,9 @@
 import {Container, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
 import {deleteDataAPI, getDataAPI, sendDataAPI} from "../../helpers/api.jsx";
-import Twitter from "./twitter.jsx";
+import Twitter from "./twitter/twitter.jsx";
 
 export default function Daily() {
-
-    const [tasksReddit, setTasksReddit] = useState([]);
-    const [titleReddit, setTittleReddit] = useState('');
-    const [descReddit, setDescReddit] = useState('');
-
-    useEffect(() => {
-        getDataAPI("Reddit")
-            .then((data) => {
-                setTasksReddit(data)
-            })
-            .catch(console.error)
-    }, [])
-
-    const [tasksInstagram, setTasksInstagram] = useState([]);
-    const [titleInstagram, setTittleInstagram] = useState('');
-    const [descInstagram, setDescInstagram] = useState('');
-
-    useEffect(() => {
-        getDataAPI("Instagram")
-            .then((data) => {
-                setTasksInstagram(data)
-            })
-            .catch(console.error)
-    }, [])
 
     const [tasksSnapchat, setTasksSnapchat] = useState([]);
     const [titleSnapchat, setTittleSnapchat] = useState('');

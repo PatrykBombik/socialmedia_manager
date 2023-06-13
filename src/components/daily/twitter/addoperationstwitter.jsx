@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {sendDataAPI} from "../../helpers/api.jsx";
+import {sendDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
 function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter}) {
@@ -9,7 +9,7 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
-                timeSpent: '0',
+                timeSpent: 0,
                 addedDate: new Date(),
                 taskId
             }, 'operations');
