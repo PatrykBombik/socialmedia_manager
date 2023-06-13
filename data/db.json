@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Twitter",
       "description": "test\n",
-      "status": "open",
+      "status": "closed",
       "addedDate": "2023-06-12T18:20:12.492Z"
     },
     {
@@ -27,15 +27,29 @@
       "description": "Wykonaj codzienne czynności związane ze SnapChatem",
       "status": "open",
       "addedDate": "2023-06-12T18:20:23.910Z"
+    },
+    {
+      "title": "f",
+      "description": "v",
+      "status": "open",
+      "addedDate": "2023-06-13T15:55:19.017Z",
+      "id": 5
     }
   ],
   "operations": [
     {
-      "description": "czx",
+      "description": "czxv",
       "timeSpent": 4,
       "addedDate": "2023-06-13T15:20:32.488Z",
       "taskId": 1,
       "id": 1
+    },
+    {
+      "description": "c",
+      "timeSpent": 0,
+      "addedDate": "2023-06-13T15:55:22.082Z",
+      "taskId": 5,
+      "id": 2
     }
   ]
 }
