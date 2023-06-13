@@ -3,8 +3,8 @@
     {
       "id": 1,
       "title": "Twitter",
-      "description": "test\n",
-      "status": "closed",
+      "description": "testv",
+      "status": "open",
       "addedDate": "2023-06-12T18:20:12.492Z"
     },
     {
@@ -24,32 +24,17 @@
     {
       "id": 4,
       "title": "Snapchat",
-      "description": "Wykonaj codzienne czynności związane ze SnapChatem",
+      "description": "Wykonaj poniższe czynności",
       "status": "open",
       "addedDate": "2023-06-12T18:20:23.910Z"
     },
     {
-      "title": "f",
-      "description": "v",
+      "title": "dsf",
+      "description": "sdf",
       "status": "open",
-      "addedDate": "2023-06-13T15:55:19.017Z",
+      "addedDate": "2023-06-13T16:47:38.238Z",
       "id": 5
     }
   ],
-  "operations": [
-    {
-      "description": "czxv",
-      "timeSpent": 4,
-      "addedDate": "2023-06-13T15:20:32.488Z",
-      "taskId": 1,
-      "id": 1
-    },
-    {
-      "description": "c",
-      "timeSpent": 0,
-      "addedDate": "2023-06-13T15:55:22.082Z",
-      "taskId": 5,
-      "id": 2
-    }
-  ]
+  "operations": []
 }
