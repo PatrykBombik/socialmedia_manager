@@ -18,7 +18,7 @@
       "title": "test",
       "description": "test",
       "status": "open",
-      "addedDate": "2023-06-12T22:12:24.502Z",
+      "addedDate": "2023-06-13T08:10:29.772Z",
       "id": 3
     }
   ],
@@ -78,11 +78,25 @@
   ],
   "operations": [
     {
-      "description": "test",
-      "timeSpent": "0h 0m",
-      "addedDate": "2023-06-12T22:12:27.368Z",
+      "description": "test1",
+      "timeSpent": "0",
+      "addedDate": "2023-06-13T08:10:34.712Z",
       "taskId": 3,
       "id": 1
+    },
+    {
+      "description": "test2",
+      "timeSpent": "0",
+      "addedDate": "2023-06-13T08:10:37.503Z",
+      "taskId": 3,
+      "id": 2
+    },
+    {
+      "description": "test3",
+      "timeSpent": "0",
+      "addedDate": "2023-06-13T08:11:51.114Z",
+      "taskId": 3,
+      "id": 3
     }
   ]
 }

@@ -9,7 +9,7 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
         if (value.trim() !== '') {
             const data = await sendDataAPI({
                 description: value,
-                timeSpent: '0h 0m',
+                timeSpent: '0',
                 addedDate: new Date(),
                 taskId
             }, 'operations');
@@ -21,6 +21,7 @@ function  AddTwitterOperations({taskId, setOperationTwitterId, setTasksTwitter})
                     task.operations = [...operations, data]
                     return task
                 }))
+            setOperationTwitterId(null);
         }
     }
 

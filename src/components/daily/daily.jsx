@@ -1,6 +1,6 @@
 import {Container, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
-import {deleteTaskAPI, getDataAPI, sendDataAPI} from "../../helpers/api.jsx";
+import {deleteDataAPI, getDataAPI, sendDataAPI} from "../../helpers/api.jsx";
 import Twitter from "./twitter.jsx";
 
 export default function Daily() {
