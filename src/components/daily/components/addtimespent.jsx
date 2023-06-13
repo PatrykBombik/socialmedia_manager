@@ -2,7 +2,7 @@ import {useState} from "react";
 import {updateDataAPI} from "../../../helpers/api.jsx";
 import PropTypes from "prop-types";
 
-function Addtimespentreddit({operationId, timeSpent, setTasks, setTimeSpentId}) {
+function Addtimespent({operationId, timeSpent, setTasks, setTimeSpentId}) {
     const [value, setValue] = useState(0);
 
 
@@ -28,28 +28,28 @@ function Addtimespentreddit({operationId, timeSpent, setTasks, setTimeSpentId}) 
         }
     }
 
-    return (
-        <>
-            {value < 0 && <b>Wartość musi być dodatnia</b>}
-            <input
-                type="number"
-                value={value}
-                onChange={(e) => setValue(e.target.valueAsNumber)}
-                min="1"
+        return (
+            <>
+                {value < 0 && <b>Wartość musi być dodatnia</b>}
+                <input
+                    type="number"
+                    value={value}
+                    onChange={(e) => setValue(e.target.valueAsNumber)}
+                    min="1"
 
-            />
-            <button onClick={handleUpdateOperation}>add</button>
-            <button onClick={() => setTimeSpentId(null)}>Cancel</button>
-        </>
-    );
-}
+                />
+                <button onClick={handleUpdateOperation}>add</button>
+                <button onClick={() => setTimeSpentId(null)}>Cancel</button>
+            </>
+        );
+    }
 
-Addtimespentreddit.propTypes = {
-    operationId: PropTypes.number,
-    timeSpent: PropTypes.number,
-    setTasks: PropTypes.func,
-    setTimeSpentId: PropTypes.func
+    Addtimespent.propTypes = {
+        operationId: PropTypes.number,
+        timeSpent: PropTypes.number,
+        setTasks: PropTypes.func,
+        setTimeSpentId: PropTypes.func
 
-}
+    }
 
-export default Addtimespentreddit;
+    export default Addtimespent;

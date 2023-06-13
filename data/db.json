@@ -1,116 +1,41 @@
 {
-  "Twitter": [
+  "tasks": [
     {
       "id": 1,
-      "title": "Wrzuć 3 posty",
-      "description": "Opis zadania na Twitterze",
+      "title": "Twitter",
+      "description": "test\n",
       "status": "open",
-      "addedDate": "2023-06-05"
+      "addedDate": "2023-06-12T18:20:12.492Z"
     },
     {
       "id": 2,
-      "title": "Udostępnij relację",
-      "description": "Opis zadania na Twitterze",
+      "title": "Reddit",
+      "description": "Dodaj posty do poniższych subredditów",
       "status": "open",
-      "addedDate": "2023-06-05"
+      "addedDate": "2023-06-12T18:20:23.910Z"
     },
     {
-      "title": "test1",
-      "description": "test1",
+      "id": 3,
+      "title": "Instagram",
+      "description": "Wykonaj poniższe czynności",
       "status": "open",
-      "addedDate": "2023-06-13T10:16:36.009Z",
-      "id": 3
-    }
-  ],
-  "Reddit": [
-    {
-      "id": 1,
-      "title": "Wrzuć 3 posty",
-      "description": "Opis zadania na Reddicie",
-      "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
+      "addedDate": "2023-06-12T18:20:23.910Z"
     },
     {
-      "id": 2,
-      "title": "Odpowiedz na pytania użytkowników",
-      "description": "Opis zadania na Reddicie",
+      "id": 4,
+      "title": "Snapchat",
+      "description": "Wykonaj codzienne czynności związane ze SnapChatem",
       "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
-    },
-    {
-      "title": "test",
-      "description": "test",
-      "status": "open",
-      "addedDate": "2023-06-13T11:11:18.320Z",
-      "id": 3
-    }
-  ],
-  "Instagram": [
-    {
-      "id": 1,
-      "title": "Wrzuć 3 posty",
-      "description": "Opis zadania na Instagramie",
-      "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
-    },
-    {
-      "id": 2,
-      "title": "Zaplanuj następny post",
-      "description": "Opis zadania na Instagramie",
-      "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
-    },
-    {
-      "title": "rsa",
-      "description": "",
-      "status": "open",
-      "addedDate": "2023-06-13T11:09:59.513Z",
-      "id": 3
-    },
-    {
-      "title": "sdf",
-      "description": "sdf",
-      "status": "open",
-      "addedDate": "2023-06-13T11:10:51.100Z",
-      "id": 4
-    }
-  ],
-  "Snapchat": [
-    {
-      "id": 1,
-      "title": "Dodaj historię dnia",
-      "description": "Opis zadania na Snapchacie",
-      "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
-    },
-    {
-      "id": 2,
-      "title": "Wyslij Snap do przyjaciela",
-      "description": "Opis zadania na Snapchacie",
-      "status": "open",
-      "addedDate": "2023-06-05",
-      "timeSpent": "0h 0m"
-    },
-    {
-      "title": "test",
-      "description": "test",
-      "status": "open",
-      "addedDate": "2023-06-13T11:11:34.730Z",
-      "id": 3
+      "addedDate": "2023-06-12T18:20:23.910Z"
     }
   ],
   "operations": [
     {
-      "description": "vxcx",
-      "timeSpent": 0,
-      "addedDate": "2023-06-13T11:11:04.059Z",
-      "taskId": 4,
-      "id": 4
+      "description": "czx",
+      "timeSpent": 4,
+      "addedDate": "2023-06-13T15:20:32.488Z",
+      "taskId": 1,
+      "id": 1
     }
   ]
 }
