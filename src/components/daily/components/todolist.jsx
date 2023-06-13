@@ -25,6 +25,7 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
 
+
 function Todolist() {
 
     const [tasks, setTasks] = useState([]);
@@ -37,6 +38,7 @@ function Todolist() {
     const [editingDesc, setEditingDesc] = useState('');
     const [editingOperationId, setEditingOperationId] = useState(null);
     const [editingOperationDesc, setEditingOperationDesc] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const data = Promise.all([getDataAPI("tasks"), getDataAPI("operations")])
@@ -52,6 +54,12 @@ function Todolist() {
             })
             .catch(console.error)
     }, [])
+
+    useEffect(() => {
+        const query = window.matchMedia("(max-width: 768px)");
+        setIsMobile(query.matches);
+    }, []);
+
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -210,7 +218,6 @@ function Todolist() {
                         variant="outlined"
                         value={title}
                         type="text"
-                        id="title"
                         name="title"
                         onChange={(event) => setTitle(event.target.value)}
                     />
@@ -218,7 +225,6 @@ function Todolist() {
                         id="outlined-basic"
                         label="Wpisz opis zadania"
                         variant="outlined"
-                        id="desc"
                         name="desc"
                         value={desc}
                         onChange={(event) => setDesc(event.target.value)}
@@ -236,7 +242,8 @@ function Todolist() {
                             component="nav"
                             aria-labelledby="nested-list-subheader"
                         >
-                            <ListItemButton onClick={() => {}}>
+                            <ListItemButton onClick={() => {}} sx={{display: "flex"}}>
+                                <Grid sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                 {task.status === 'open' ? (
                                 <ListItemIcon>
                                     <RadioButtonUncheckedRoundedIcon/>
@@ -247,21 +254,22 @@ function Todolist() {
                                     </ListItemIcon>
                                     )}
                                 <ListItemText primary={task.title} secondary={task.description}/>
+                                </Grid>
                                 <ButtonGroup variant="text" aria-label="text button group">
 
                                     {task.status === "open" && (
                                         <>
                                             <Button onClick={() => handleEditTask(task.id)} data-id={task.id}>
-                                                <ListItemIcon><EditRoundedIcon/>Edytuj</ListItemIcon>
+                                                <ListItemIcon><EditRoundedIcon/>Edit</ListItemIcon>
                                             </Button>
                                             <Button onClick={handleFinishTask(task.id)}>
-                                                <ListItemIcon><DoneRoundedIcon/>Finish</ListItemIcon>
+                                                <ListItemIcon><DoneRoundedIcon/>Done</ListItemIcon>
                                             </Button>
                                         </>
                                     )}
                                     {task.status === "closed" && (
                                         <Button onClick={handleUndoFinishTask(task.id)}>
-                                            <ListItemIcon><ReplayRoundedIcon/>Cofnij</ListItemIcon>
+                                            <ListItemIcon><ReplayRoundedIcon/>Back</ListItemIcon>
                                         </Button>
                                     )}
                                     <Button onClick={() => handleDelete(task.id)} data-id={task.id}>
@@ -269,25 +277,32 @@ function Todolist() {
                                     </Button>
                                 </ButtonGroup>
                             </ListItemButton>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Collapse in={true} timeout="auto" unmountOnExit>
                                 {operationId === task.id ? (
+                                    <Grid item md={12} sm={12} xs={12} sx={{display: "flex", flexDirection: "column"}}>
                                     <AddOperations
                                         setTasks={setTasks}
                                         setOperationId={setOperationId}
                                         taskId={task.id}
                                     />
+                                    </Grid>
                                 ) : (
                                     <>
                                         {task.status === "open" && (
+                                            <Grid sx={{display: "flex", flexDirection: "column"}}>
                                             <Button onClick={() => setOperationId(task.id)}>
                                                 <ListItemIcon><AddRoundedIcon/>Dodaj zadanie</ListItemIcon>
                                             </Button>
+                                            </Grid>
                                         )}
                                     </>
                                 )}
+
                                 {task.operations &&
                                     task.operations.map((operation) => (
-                                        <List component="div" disablePadding key={operation.id}>
+                                        <List component="div" disablePadding key={operation.id}
+                                              sx={{display: "flex"}}
+                                        >
                                             {editingOperationId === operation.id ? (
                                                 <form
                                                     onSubmit={(event) =>
@@ -307,7 +322,11 @@ function Todolist() {
                                                     <Button variant="outlined" type="submit">Save</Button>
                                                 </form>
                                             ) : (
-                                                <><ListItemText primary={operation.description}/>
+                                                <Grid item md={12} sm={12} xs={12}
+                                                      sx={{
+                                                          display: "flex",
+                                                          alignItems: "center"}}>
+                                                    <ListItemText primary={operation.description}/>
 
                                                     {operation.timeSpent !== 0 && (
                                                         <Chip
@@ -316,7 +335,7 @@ function Todolist() {
                                                             label={`${~~(operation.timeSpent / 60)}h ${operation.timeSpent % 60}m`}
                                                         />
                                                     )}
-                                                    <ButtonGroup variant="text" aria-label="text button group">
+                                                    <ButtonGroup variant="text" aria-label="text button group" >
 
                                                         {operation.id === timeSpentID ? (
                                                             <Addtimespent
@@ -328,19 +347,21 @@ function Todolist() {
                                                         ) : (
                                                             <>
                                                                 {task.status === "open" && (
-                                                                    <Button
-                                                                        onClick={() => setTimeSpentId(operation.id)}
-                                                                    >
-                                                                        Add Spent Time
-                                                                    </Button>
+                                                                    <>
+                                                                        <Button
+                                                                            onClick={() => setTimeSpentId(operation.id)}
+                                                                        >
+                                                                            Add Spent Time
+                                                                        </Button>
+                                                                        <Button
+                                                                            onClick={() => handleEditOperation(operation.id)}
+                                                                        >
+                                                                            Edit
+                                                                        </Button>
+                                                                    </>
                                                                 )}
                                                             </>
                                                         )}
-                                                        <Button
-                                                            onClick={() => handleEditOperation(operation.id)}
-                                                        >
-                                                            Edit
-                                                        </Button>
                                                         {task.status === "open" && (
                                                             <Button
                                                                 onClick={() => handleDeleteOperation(operation.id)}
@@ -350,7 +371,7 @@ function Todolist() {
                                                             </Button>
                                                         )}
                                                     </ButtonGroup>
-                                                </>
+                                                </Grid>
                                             )}
                                         </List>
                                     ))}
@@ -378,14 +399,13 @@ function Todolist() {
                             </form>
                         ) : (
                             <>
-
                             </>
                         )}
                     </Grid>
                 ))}
             </Grid>
         </Container>
-    );
+    )
 }
 
 export default Todolist
