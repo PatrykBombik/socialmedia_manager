@@ -76,5 +76,35 @@
       "taskId": 3,
       "id": 4
     }
+  ],
+  "registration": [
+    {
+      "email": "patryk",
+      "password": "patry",
+      "status": "active",
+      "addedDate": "2023-06-14T14:59:15.762Z",
+      "id": 1
+    },
+    {
+      "email": "patryk2",
+      "password": "patryk2",
+      "status": "active",
+      "addedDate": "2023-06-14T14:59:42.951Z",
+      "id": 2
+    },
+    {
+      "email": "Patryk",
+      "password": "ok",
+      "status": "active",
+      "addedDate": "2023-06-14T15:53:18.259Z",
+      "id": 3
+    },
+    {
+      "email": "patryk.bombik@gmail.com",
+      "password": "testtest",
+      "status": "active",
+      "addedDate": "2023-06-14T16:02:52.903Z",
+      "id": 4
+    }
   ]
 }
