@@ -60,7 +60,8 @@ export default function EarnCalculator() {
 
     const calculateEarnings = (sliderValue, followersValue, subscriptionValue) => {
         const earnings = Math.round((sliderValue * followersValue * subscriptionValue) / 100);
-        setEarnings(earnings)
+
+        setEarnings(earnings.toLocaleString("fi-FI"))
     }
 
 
@@ -97,7 +98,7 @@ export default function EarnCalculator() {
                     <Box sx={{
                         display: "flex",
                         gap: "2",
-                        justifyContent: "space-around",
+                        justifyContent: "center",
                         alignItems:"center",
                         marginTop: "25px"
                     }}>
@@ -124,6 +125,7 @@ export default function EarnCalculator() {
                         />
 
                         <TextField
+                            sx={{marginLeft: '20px'}}
                             id="outlined-number"
                             label="Cena miesięcznej subskrypcji"
                             type="number"
@@ -135,7 +137,7 @@ export default function EarnCalculator() {
                                 inputProps: {
                                     min: 1,
                                     onKeyPress: (event) => {
-                                        if (event.key === '-' || event.key === 'e' || event.key === '.') {
+                                        if (event.key === '-' || event.key === 'e' || event.key === '.' ) {
                                             event.preventDefault();
                                         }
                                 }
