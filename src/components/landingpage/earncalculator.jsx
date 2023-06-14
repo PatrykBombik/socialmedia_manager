@@ -85,7 +85,6 @@ export default function EarnCalculator() {
                         <Slider
                             style={{color: "lightblue"}}
                             aria-label="Always visible"
-                            defaultValue={5}
                             getAriaValueText={valuetext}
                             step={1}
                             marks={marks}
@@ -108,6 +107,7 @@ export default function EarnCalculator() {
                             type="number"
                             size={"small"}
                             inputProps={{
+                                defaultValue: 10000,
                                 step: 1000,
                                 min: 1000,
                                 onKeyPress: (event) => {
@@ -116,7 +116,6 @@ export default function EarnCalculator() {
                                     }
                                 }
                             }}
-                            defaultValue={10000}
                             value={followersValue}
                             onChange={handleFollowersValue}
                             InputLabelProps={{
@@ -129,12 +128,11 @@ export default function EarnCalculator() {
                             id="outlined-number"
                             label="Cena miesięcznej subskrypcji"
                             type="number"
-                            defaultValue={9.99}
                             size={"small"}
-                            error={false}
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">$</InputAdornment>,
                                 inputProps: {
+                                    defaultValue: 9.99,
                                     min: 1,
                                     onKeyPress: (event) => {
                                         if (event.key === '-' || event.key === 'e' || event.key === '.' ) {

@@ -49,7 +49,14 @@ export default function Article() {
                         <p style={pStyle}>Dołącz do nas i stań się niezależnym finansowo! Teraz to tym będziesz dla siebie Szefem!</p>
                     </Grid>
                 </Grid>
-                <Grid container spacing={2}>
+                <Grid container spacing={2}
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '20px'
+                }}
+                >
                     <Grid item md={6} sm={6} xs={12} style={{
                         display: "flex",
                         flexDirection: "column",
