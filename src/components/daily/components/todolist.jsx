@@ -24,8 +24,8 @@ import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
-import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import TimerIcon from '@mui/icons-material/Timer';
+import MoreTimeOutlinedIcon from '@mui/icons-material/MoreTimeOutlined';
 
 
 function Todolist() {
@@ -40,6 +40,7 @@ function Todolist() {
     const [editingDesc, setEditingDesc] = useState('');
     const [editingOperationId, setEditingOperationId] = useState(null);
     const [editingOperationDesc, setEditingOperationDesc] = useState("");
+
 
     useEffect(() => {
         const data = Promise.all([getDataAPI("tasks"), getDataAPI("operations")])
@@ -204,6 +205,7 @@ function Todolist() {
 
 
     return (
+        //ADDING TASKS
         <Container maxWidth="xl">
             <h1 style={{textAlign: "center"}}>Twoje codzienne zadania!</h1>
             <form onSubmit={handleSubmit}>
@@ -230,16 +232,34 @@ function Todolist() {
                     </Button>
                 </Stack>
             </form>
+            {/*RENDER TASKS*/}
             <Grid container spacing={2} gap={2} style={{marginTop: "20px"}}>
                 {tasks.map((task) => (
-                    <Grid item md={12} sm={12} xs={12} key={task.id}>
+                    <Grid item md={12} sm={12} xs={12} key={task.id} className="task"
+                          sx={{
+                              borderBottom: 1,
+                              borderTop: 1,
+                              borderColor: 'primary.main',
+                              boxShadow: 1
+                          }}>
                         <List
                             sx={{width: '100%', bgcolor: 'background.paper'}}
                             component="nav"
                             aria-labelledby="nested-list-subheader"
                         >
-                            <ListItemButton onClick={() => {}} sx={{display: "flex", justifyContent: "space-between"}}>
-                                <Grid sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <ListItemButton onClick={() => {}} sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center"
+                            }}
+                            >
+                                <Grid item md={12} sm={12} xs={12}
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                }}
+                                >
                                 {task.status === 'open' ? (
                                 <ListItemIcon>
                                     <RadioButtonUncheckedRoundedIcon/>
@@ -258,7 +278,7 @@ function Todolist() {
                                             <Button size="small" onClick={() => handleEditTask(task.id)} data-id={task.id}>
                                                 <ListItemIcon sx={{
                                                     display: "flex",
-                                                    justifyContent: "flex-end"
+                                                    justifyContent: "center"
                                                 }}><EditRoundedIcon/></ListItemIcon>
                                             </Button>
                                             <Button size="small" onClick={handleFinishTask(task.id)}>
@@ -274,17 +294,18 @@ function Todolist() {
                                             <ListItemIcon><ReplayRoundedIcon/></ListItemIcon>
                                         </Button>
                                     )}
-
-                                    <Button onClick={() => handleDelete(task.id)} data-id={task.id}>
+                                    {task.default !== "true" && (
+                                    <Button size="small" onClick={() => handleDelete(task.id)} data-id={task.id}>
                                         <ListItemIcon><DeleteForeverRoundedIcon/></ListItemIcon>
                                     </Button>
+                                    )}
                                 </ButtonGroup>
                             </ListItemButton>
                             {editingTaskId === task.id ? (
                                 <form onSubmit={(event) => handleUpdateTask(event, task.id)}>
                                     <Grid sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <TextField
-                                        sx={{marginTop: "10px"}}
+                                        sx={{marginTop: "10px", marginRight: "15px"}}
                                         fullWidth="true"
                                         id="outlined-basic"
                                         label="Edytuj nazwę zadania"
@@ -294,7 +315,7 @@ function Todolist() {
                                         onChange={(event) => setEditingTitle(event.target.value)}
                                     />
                                     <TextField
-                                        sx={{marginTop: "10px"}}
+                                        sx={{marginTop: "10px", marginRight: "15px"}}
                                         fullWidth="true"
                                         id="outlined-basic"
                                         label="Edytuj opis zadania"
@@ -316,7 +337,12 @@ function Todolist() {
                             )}
                             <Collapse in={true} timeout="auto" unmountOnExit>
                                 {operationId === task.id ? (
-                                    <Grid item md={12} sm={12} xs={12} sx={{display: "flex", flexDirection: "column"}}>
+                                    <Grid item md={12} sm={12} xs={12}
+                                          sx={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              marginRight: "15px"
+                                    }}>
                                     <AddOperations
                                         setTasks={setTasks}
                                         setOperationId={setOperationId}
@@ -334,11 +360,21 @@ function Todolist() {
                                         )}
                                     </>
                                 )}
-
+                                {/*RENDER OPERATIONS*/}
                                 {task.operations &&
                                     task.operations.map((operation) => (
                                         <List component="div" disablePadding key={operation.id}
-                                              sx={{display: "flex", marginTop: "20px"}}
+                                              sx={{
+                                                  display: "flex",
+                                                  marginTop: "20px",
+                                                  marginRight: "20px",
+                                                  marginBottom: "20px",
+                                                  border: 1,
+                                                  borderRadius: 2,
+                                                  borderColor: 'primary.main',
+                                                  boxShadow: 3
+
+                                        }}
                                         >
                                             <Grid item md={12} sm={12} xs={12}>
                                             {editingOperationId === operation.id ? (
@@ -348,42 +384,67 @@ function Todolist() {
                                                     }
                                                 >
                                                     <TextField
-                                                        id="outlined-basic"
+                                                        sx={{ margin: "15px"}}
+                                                        id="outlined-multiline-flexible"
                                                         label="Edytuj opis zadania"
-                                                        variant="outlined"
-                                                        type="text"
+                                                        multiline
+                                                        maxRows={4}
                                                         value={editingOperationDesc}
                                                         onChange={(event) =>
                                                             setEditingOperationDesc(event.target.value)
                                                         }
                                                     />
-                                                    <Button variant="outlined" type="submit">
-                                                        <ListItemIcon sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                                    <Button type="submit"
+                                                    sx={{
+                                                        marginRight: "20px"
+                                                    }}>
+                                                        <ListItemIcon sx={{
+                                                            display: "flex",
+                                                            flexDirection: "column",
+                                                            alignItems: "center"
+                                                        }}>
                                                             <SaveRoundedIcon/>
                                                             Save
                                                         </ListItemIcon>
                                                     </Button>
                                                 </form>
                                             ) : (
-                                                <Grid item md={12} sm={12} xs={12}
+                                                <Grid className="operations" item md={12} sm={12} xs={12}
                                                       sx={{
                                                           display: "flex",
                                                           alignItems: "center",
                                                           flexWrap: "wrap",
                                                           gap: "20px",
-                                                          marginTop: "20px"
+                                                          marginTop: "10px"
 
                                                 }}>
-                                                    <ListItemText primary={operation.description}/>
+                                                    <ListItemText primary={`${operation.description}`}
+                                                                  sx={{
+                                                                      display: "flex",
+                                                                      alignItems: "center",
+                                                                      marginBottom: "20px",
+                                                                      marginLeft: "20px",
+                                                                      marginRight: "20px"
+                                                                  }}/>
+
                                                     <Chip
-                                                        sx={{fontSize: "10px"}}
+                                                        sx={{fontSize: "10px", marginRight: "10px", marginLeft: "20px", marginBottom: "10px"}}
                                                         size="small"
                                                         icon={<TimerIcon />}
                                                         variant="outlined"
                                                         color="primary"
                                                         label={`${~~(operation.timeSpent / 60)}h ${operation.timeSpent % 60}m`}
                                                     />
-                                                    <ButtonGroup size="small" variant="text" aria-label="text button group" >
+                                                    <ButtonGroup
+                                                        color="primary"
+                                                        size="small"
+                                                        variant="contained"
+                                                        aria-label="outlined primary button group"
+                                                    sx={{
+                                                        marginBottom:"10px",
+                                                        marginLeft:"10px",
+                                                        marginRight:"10px"
+                                                    }}>
 
                                                         {operation.id === timeSpentID ? (
                                                             <Addtimespent
@@ -402,7 +463,7 @@ function Todolist() {
                                                                             <ListItemIcon sx={{
                                                                                 display: "flex",
                                                                                 justifyContent: "center"
-                                                                            }}><MoreTimeIcon/></ListItemIcon>
+                                                                            }}><MoreTimeOutlinedIcon/></ListItemIcon>
                                                                         </Button>
                                                                         <Button
                                                                             onClick={() => handleEditOperation(operation.id)}
@@ -421,7 +482,10 @@ function Todolist() {
                                                                 onClick={() => handleDeleteOperation(operation.id)}
                                                                 data-operationid={operation.id}
                                                             >
-                                                                <ListItemIcon><DeleteForeverRoundedIcon/></ListItemIcon>
+                                                                <ListItemIcon sx={{
+                                                                    display: "flex",
+                                                                    justifyContent: "center"
+                                                                }}><DeleteForeverRoundedIcon/></ListItemIcon>
                                                             </Button>
                                                         )}
                                                     </ButtonGroup>

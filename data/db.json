@@ -33,20 +33,19 @@
       "addedDate": "2023-06-12T18:20:23.910Z"
     },
     {
+      "title": "test koncowy",
+      "description": "test koncowy",
+      "status": "open",
+      "addedDate": "2023-06-14T12:16:26.853Z",
+      "id": 5
+    },
+    {
       "title": "test",
       "description": "test",
       "status": "open",
-      "addedDate": "2023-06-14T09:20:34.464Z",
-      "id": 5
+      "addedDate": "2023-06-14T12:35:41.096Z",
+      "id": 6
     }
   ],
-  "operations": [
-    {
-      "description": "test",
-      "timeSpent": 0,
-      "addedDate": "2023-06-14T09:37:15.648Z",
-      "taskId": 1,
-      "id": 1
-    }
-  ]
+  "operations": []
 }
