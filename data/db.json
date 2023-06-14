@@ -76,5 +76,72 @@
       "taskId": 3,
       "id": 4
     }
+  ],
+  "registration": [
+    {
+      "email": "patryk",
+      "password": "patry",
+      "status": "active",
+      "addedDate": "2023-06-14T14:59:15.762Z",
+      "id": 1
+    },
+    {
+      "email": "patryk2",
+      "password": "patryk2",
+      "status": "active",
+      "addedDate": "2023-06-14T14:59:42.951Z",
+      "id": 2
+    },
+    {
+      "email": "Patryk",
+      "password": "ok",
+      "status": "active",
+      "addedDate": "2023-06-14T15:53:18.259Z",
+      "id": 3
+    },
+    {
+      "email": "patryk.bombik@gmail.com",
+      "password": "testtest",
+      "status": "active",
+      "addedDate": "2023-06-14T16:02:52.903Z",
+      "id": 4
+    }
+  ],
+  "questions": [
+    {
+      "email": "123",
+      "name": "123",
+      "question": "123",
+      "addedDate": "2023-06-14T17:18:19.944Z",
+      "id": 1
+    },
+    {
+      "email": "asdasd@das.com",
+      "name": "Patrylk",
+      "question": "czxcz",
+      "addedDate": "2023-06-14T17:25:20.664Z",
+      "id": 2
+    },
+    {
+      "email": "",
+      "name": "testv",
+      "question": "n",
+      "addedDate": "2023-06-14T17:41:09.359Z",
+      "id": 3
+    },
+    {
+      "email": "dfg@pa.p",
+      "name": "34",
+      "question": "34",
+      "addedDate": "2023-06-14T17:52:38.706Z",
+      "id": 4
+    },
+    {
+      "email": "pat@fam.com",
+      "name": "asd",
+      "question": "zxczc",
+      "addedDate": "2023-06-14T17:56:53.412Z",
+      "id": 5
+    }
   ]
 }
