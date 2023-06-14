@@ -31,13 +31,20 @@
       "status": "open",
       "default": "true",
       "addedDate": "2023-06-12T18:20:23.910Z"
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "status": "open",
+      "addedDate": "2023-06-14T09:20:34.464Z",
+      "id": 5
     }
   ],
   "operations": [
     {
-      "description": "Dodaj dwa tweety",
-      "timeSpent": 12,
-      "addedDate": "2023-06-14T07:12:37.642Z",
+      "description": "test",
+      "timeSpent": 0,
+      "addedDate": "2023-06-14T09:37:15.648Z",
       "taskId": 1,
       "id": 1
     }

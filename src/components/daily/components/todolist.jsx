@@ -302,7 +302,12 @@ function Todolist() {
                                         value={editingDesc}
                                         onChange={(event) => setEditingDesc(event.target.value)}
                                     />
-                                    <Button sx={{marginTop: "10px"}} type="submit"><ListItemIcon sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}><SaveRoundedIcon/>Zapisz</ListItemIcon></Button>
+                                    <Button sx={{marginTop: "10px"}} type="submit">
+                                        <ListItemIcon sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                            <SaveRoundedIcon/>
+                                            Zapisz
+                                        </ListItemIcon>
+                                    </Button>
                                     </Grid>
                                 </form>
                             ) : (
@@ -333,10 +338,11 @@ function Todolist() {
                                 {task.operations &&
                                     task.operations.map((operation) => (
                                         <List component="div" disablePadding key={operation.id}
-                                              sx={{display: "flex"}}
+                                              sx={{display: "flex", marginTop: "20px"}}
                                         >
+                                            <Grid item md={12} sm={12} xs={12}>
                                             {editingOperationId === operation.id ? (
-                                                <form
+                                                <form style={{display: "flex", justifyContent:"space-between"}}
                                                     onSubmit={(event) =>
                                                         handleUpdateOperation(event, operation.id)
                                                     }
@@ -351,13 +357,23 @@ function Todolist() {
                                                             setEditingOperationDesc(event.target.value)
                                                         }
                                                     />
-                                                    <Button variant="outlined" type="submit">Save</Button>
+                                                    <Button variant="outlined" type="submit">
+                                                        <ListItemIcon sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                                            <SaveRoundedIcon/>
+                                                            Save
+                                                        </ListItemIcon>
+                                                    </Button>
                                                 </form>
                                             ) : (
                                                 <Grid item md={12} sm={12} xs={12}
                                                       sx={{
                                                           display: "flex",
-                                                          alignItems: "center"}}>
+                                                          alignItems: "center",
+                                                          flexWrap: "wrap",
+                                                          gap: "20px",
+                                                          marginTop: "20px"
+
+                                                }}>
                                                     <ListItemText primary={operation.description}/>
                                                     <Chip
                                                         sx={{fontSize: "10px"}}
@@ -411,6 +427,7 @@ function Todolist() {
                                                     </ButtonGroup>
                                                 </Grid>
                                             )}
+                                            </Grid>
                                         </List>
                                     ))}
                             </Collapse>

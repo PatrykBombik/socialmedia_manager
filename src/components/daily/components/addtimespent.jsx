@@ -46,22 +46,23 @@ function Addtimespent({operationId, timeSpent, setTasks, setTimeSpentId}) {
                     min="1"
 
                 />
-
-                <Button size="small"
-                    onClick={handleUpdateOperation}
-                ><ListItemIcon sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                }}
-                ><MoreTimeIcon/></ListItemIcon></Button>
-                <Button size="small" onClick={() => setTimeSpentId(null)}>
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "flex-start"
-                        }}
-                    ><CancelRoundedIcon/></ListItemIcon>
-                </Button>
+                <ButtonGroup size="small" variant="text" aria-label="text button group">
+                    <Button size="small"
+                            onClick={handleUpdateOperation}
+                    ><ListItemIcon sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                    }}
+                    ><MoreTimeIcon/></ListItemIcon></Button>
+                    <Button size="small" onClick={() => setTimeSpentId(null)}>
+                        <ListItemIcon
+                            sx={{
+                                display: "flex",
+                                justifyContent: "flex-start"
+                            }}
+                        ><CancelRoundedIcon/></ListItemIcon>
+                    </Button>
+                </ButtonGroup>
             </>
         );
     }
