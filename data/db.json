@@ -28,7 +28,7 @@
       "id": 4,
       "title": "Snapchat",
       "description": "Wykonaj poniższe czynności",
-      "status": "open",
+      "status": "closed",
       "default": "true",
       "addedDate": "2023-06-12T18:20:23.910Z"
     },
@@ -47,5 +47,34 @@
       "id": 6
     }
   ],
-  "operations": []
+  "operations": [
+    {
+      "description": "test",
+      "timeSpent": 0,
+      "addedDate": "2023-06-14T14:08:55.187Z",
+      "taskId": 1,
+      "id": 1
+    },
+    {
+      "description": "asd",
+      "timeSpent": 0,
+      "addedDate": "2023-06-14T14:08:59.677Z",
+      "taskId": 2,
+      "id": 2
+    },
+    {
+      "description": "v",
+      "timeSpent": 0,
+      "addedDate": "2023-06-14T14:09:04.955Z",
+      "taskId": 2,
+      "id": 3
+    },
+    {
+      "description": "Dodaj dwa twitty",
+      "timeSpent": 0,
+      "addedDate": "2023-06-14T14:09:11.227Z",
+      "taskId": 3,
+      "id": 4
+    }
+  ]
 }
