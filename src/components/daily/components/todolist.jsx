@@ -24,6 +24,8 @@ import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import TimerIcon from '@mui/icons-material/Timer';
 
 
 function Todolist() {
@@ -38,7 +40,6 @@ function Todolist() {
     const [editingDesc, setEditingDesc] = useState('');
     const [editingOperationId, setEditingOperationId] = useState(null);
     const [editingOperationDesc, setEditingOperationDesc] = useState("");
-    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const data = Promise.all([getDataAPI("tasks"), getDataAPI("operations")])
@@ -54,11 +55,6 @@ function Todolist() {
             })
             .catch(console.error)
     }, [])
-
-    useEffect(() => {
-        const query = window.matchMedia("(max-width: 768px)");
-        setIsMobile(query.matches);
-    }, []);
 
 
     async function handleSubmit(event) {
@@ -242,7 +238,7 @@ function Todolist() {
                             component="nav"
                             aria-labelledby="nested-list-subheader"
                         >
-                            <ListItemButton onClick={() => {}} sx={{display: "flex"}}>
+                            <ListItemButton onClick={() => {}} sx={{display: "flex", justifyContent: "space-between"}}>
                                 <Grid sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                 {task.status === 'open' ? (
                                 <ListItemIcon>
@@ -255,28 +251,64 @@ function Todolist() {
                                     )}
                                 <ListItemText primary={task.title} secondary={task.description}/>
                                 </Grid>
-                                <ButtonGroup variant="text" aria-label="text button group">
+                                <ButtonGroup size="small" variant="text" aria-label="text button group">
 
                                     {task.status === "open" && (
                                         <>
-                                            <Button onClick={() => handleEditTask(task.id)} data-id={task.id}>
-                                                <ListItemIcon><EditRoundedIcon/>Edit</ListItemIcon>
+                                            <Button size="small" onClick={() => handleEditTask(task.id)} data-id={task.id}>
+                                                <ListItemIcon sx={{
+                                                    display: "flex",
+                                                    justifyContent: "flex-end"
+                                                }}><EditRoundedIcon/></ListItemIcon>
                                             </Button>
-                                            <Button onClick={handleFinishTask(task.id)}>
-                                                <ListItemIcon><DoneRoundedIcon/>Done</ListItemIcon>
+                                            <Button size="small" onClick={handleFinishTask(task.id)}>
+                                                <ListItemIcon sx={{
+                                                    display: "flex",
+                                                    justifyContent: "center"
+                                                }}><DoneRoundedIcon/></ListItemIcon>
                                             </Button>
                                         </>
                                     )}
                                     {task.status === "closed" && (
-                                        <Button onClick={handleUndoFinishTask(task.id)}>
-                                            <ListItemIcon><ReplayRoundedIcon/>Back</ListItemIcon>
+                                        <Button size="small" onClick={handleUndoFinishTask(task.id)}>
+                                            <ListItemIcon><ReplayRoundedIcon/></ListItemIcon>
                                         </Button>
                                     )}
+
                                     <Button onClick={() => handleDelete(task.id)} data-id={task.id}>
                                         <ListItemIcon><DeleteForeverRoundedIcon/></ListItemIcon>
                                     </Button>
                                 </ButtonGroup>
                             </ListItemButton>
+                            {editingTaskId === task.id ? (
+                                <form onSubmit={(event) => handleUpdateTask(event, task.id)}>
+                                    <Grid sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                    <TextField
+                                        sx={{marginTop: "10px"}}
+                                        fullWidth="true"
+                                        id="outlined-basic"
+                                        label="Edytuj nazwę zadania"
+                                        variant="outlined"
+                                        type="text"
+                                        value={editingTitle}
+                                        onChange={(event) => setEditingTitle(event.target.value)}
+                                    />
+                                    <TextField
+                                        sx={{marginTop: "10px"}}
+                                        fullWidth="true"
+                                        id="outlined-basic"
+                                        label="Edytuj opis zadania"
+                                        variant="outlined"
+                                        value={editingDesc}
+                                        onChange={(event) => setEditingDesc(event.target.value)}
+                                    />
+                                    <Button sx={{marginTop: "10px"}} type="submit"><ListItemIcon sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}><SaveRoundedIcon/>Zapisz</ListItemIcon></Button>
+                                    </Grid>
+                                </form>
+                            ) : (
+                                <>
+                                </>
+                            )}
                             <Collapse in={true} timeout="auto" unmountOnExit>
                                 {operationId === task.id ? (
                                     <Grid item md={12} sm={12} xs={12} sx={{display: "flex", flexDirection: "column"}}>
@@ -327,15 +359,15 @@ function Todolist() {
                                                           display: "flex",
                                                           alignItems: "center"}}>
                                                     <ListItemText primary={operation.description}/>
-
-                                                    {operation.timeSpent !== 0 && (
-                                                        <Chip
-                                                            variant="outlined"
-                                                            color="primary"
-                                                            label={`${~~(operation.timeSpent / 60)}h ${operation.timeSpent % 60}m`}
-                                                        />
-                                                    )}
-                                                    <ButtonGroup variant="text" aria-label="text button group" >
+                                                    <Chip
+                                                        sx={{fontSize: "10px"}}
+                                                        size="small"
+                                                        icon={<TimerIcon />}
+                                                        variant="outlined"
+                                                        color="primary"
+                                                        label={`${~~(operation.timeSpent / 60)}h ${operation.timeSpent % 60}m`}
+                                                    />
+                                                    <ButtonGroup size="small" variant="text" aria-label="text button group" >
 
                                                         {operation.id === timeSpentID ? (
                                                             <Addtimespent
@@ -351,12 +383,18 @@ function Todolist() {
                                                                         <Button
                                                                             onClick={() => setTimeSpentId(operation.id)}
                                                                         >
-                                                                            Add Spent Time
+                                                                            <ListItemIcon sx={{
+                                                                                display: "flex",
+                                                                                justifyContent: "center"
+                                                                            }}><MoreTimeIcon/></ListItemIcon>
                                                                         </Button>
                                                                         <Button
                                                                             onClick={() => handleEditOperation(operation.id)}
                                                                         >
-                                                                            Edit
+                                                                            <ListItemIcon sx={{
+                                                                                display: "flex",
+                                                                                justifyContent: "center"
+                                                                            }}><EditRoundedIcon/></ListItemIcon>
                                                                         </Button>
                                                                     </>
                                                                 )}
@@ -367,7 +405,7 @@ function Todolist() {
                                                                 onClick={() => handleDeleteOperation(operation.id)}
                                                                 data-operationid={operation.id}
                                                             >
-                                                                Delete
+                                                                <ListItemIcon><DeleteForeverRoundedIcon/></ListItemIcon>
                                                             </Button>
                                                         )}
                                                     </ButtonGroup>
@@ -378,29 +416,6 @@ function Todolist() {
                             </Collapse>
 
                         </List>
-                        {editingTaskId === task.id ? (
-                            <form onSubmit={(event) => handleUpdateTask(event, task.id)}>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Edytuj nazwę zadania"
-                                    variant="outlined"
-                                    type="text"
-                                    value={editingTitle}
-                                    onChange={(event) => setEditingTitle(event.target.value)}
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Edytuj opis zadania"
-                                    variant="outlined"
-                                    value={editingDesc}
-                                    onChange={(event) => setEditingDesc(event.target.value)}
-                                />
-                                <Button type="submit"><ListItemIcon><SaveRoundedIcon/>Save</ListItemIcon></Button>
-                            </form>
-                        ) : (
-                            <>
-                            </>
-                        )}
                     </Grid>
                 ))}
             </Grid>
