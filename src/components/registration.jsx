@@ -20,9 +20,11 @@ export default function Registration() {
     const [showPassword, setShowPassword] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isRegistered, setIsRegistered] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(true)
 
     async function handleRegistry() {
-        if (!isEmailValid) {
+        if (!isEmailValid || passwordValue === '' || emailValue === '') {
+            setIsCorrect(false)
             return;
         }
 
@@ -116,6 +118,16 @@ export default function Registration() {
                     >
                         Zarejestruj się!
                     </Button>
+                    {!isCorrect ? (
+                        <Grid item md={12} sm={12} xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <Alert severity="error" sx={{textAlign: 'center'}}>
+                                <AlertTitle>Error</AlertTitle>
+                                <strong>Proszę uzupełnić wszystkie pola</strong>
+                            </Alert>
+                        </Grid>
+                    ) : (
+                            <></>
+                        )}
                         </>
                     ) : (
                         <Alert severity="success">

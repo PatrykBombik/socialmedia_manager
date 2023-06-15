@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { FormControl, InputLabel, OutlinedInput, TextField } from "@mui/material";
+import {AlertTitle, FormControl, InputLabel, OutlinedInput, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
@@ -13,17 +13,22 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import WavingHandOutlinedIcon from '@mui/icons-material/WavingHandOutlined';
 import {Link} from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 export default function Login() {
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(true)
 
 
 
     // TODO CHANGE FOR LOGIN FUNCTION
     async function handleLogin() {
-
+        if ( passwordValue === '' || emailValue === '') {
+            setIsCorrect(false)
+            return;
+        }
             return;
 
 
@@ -110,6 +115,16 @@ export default function Login() {
                         Zaloguj się!
                     </Button>
                     </Link>
+                    {!isCorrect ? (
+                        <Grid item md={12} sm={12} xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <Alert severity="error" sx={{textAlign: 'center'}}>
+                                <AlertTitle>Error</AlertTitle>
+                                <strong>Proszę uzupełnić wszystkie pola</strong>
+                            </Alert>
+                        </Grid>
+                    ) : (
+                        <></>
+                    )}
                 </Grid>
             </Grid>
         </Container>

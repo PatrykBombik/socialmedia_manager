@@ -50,7 +50,7 @@
   "operations": [
     {
       "description": "zaplanuj 5 twitow",
-      "timeSpent": 0,
+      "timeSpent": 2,
       "addedDate": "2023-06-14T14:08:55.187Z",
       "taskId": 1,
       "id": 1
@@ -175,6 +175,41 @@
       "status": "active",
       "addedDate": "2023-06-15T11:41:15.566Z",
       "id": 10
+    },
+    {
+      "email": "test@s.pl",
+      "password": "sda",
+      "status": "active",
+      "addedDate": "2023-06-15T14:11:35.762Z",
+      "id": 11
+    },
+    {
+      "email": "",
+      "password": "fd",
+      "status": "active",
+      "addedDate": "2023-06-15T14:14:39.442Z",
+      "id": 12
+    },
+    {
+      "email": "",
+      "password": "vf",
+      "status": "active",
+      "addedDate": "2023-06-15T14:19:21.060Z",
+      "id": 13
+    },
+    {
+      "email": "",
+      "password": "c",
+      "status": "active",
+      "addedDate": "2023-06-15T14:19:49.258Z",
+      "id": 14
+    },
+    {
+      "email": "sf@oc.pk",
+      "password": "sdfsf",
+      "status": "active",
+      "addedDate": "2023-06-15T14:20:47.530Z",
+      "id": 15
     }
   ],
   "questions": [
@@ -233,6 +268,13 @@
       "question": "f",
       "addedDate": "2023-06-15T11:40:46.626Z",
       "id": 8
+    },
+    {
+      "email": "we@s.pl",
+      "name": "xs",
+      "question": "sx",
+      "addedDate": "2023-06-15T14:11:13.644Z",
+      "id": 9
     }
   ]
 }
