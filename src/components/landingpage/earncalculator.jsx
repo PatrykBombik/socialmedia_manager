@@ -3,8 +3,10 @@ import earningCalcImage from "../../assets/earningcalc.jpg";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import {InputAdornment, TextField} from "@mui/material";
+import {Chip, InputAdornment, TextField} from "@mui/material";
 import {useState} from "react";
+import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import Typography from "@mui/material/Typography";
 
 const marks = [
     {
@@ -77,8 +79,8 @@ export default function EarnCalculator() {
                     textAlign: "center",
 
                 }}>
-                    <h2 style={{marginTop: "50px"}}>Zacznij monetyzować swoje social media już dziś!</h2>
-                    <h4 style={{marginTop: "50px"}}>Ilu fanów potrafisz przekonać?</h4>
+                    <Typography variant="h5" gutterBottom sx={{marginTop: "50px"}}>Zacznij monetyzować swoje social media już dziś!</Typography>
+                    <Typography variant="h6" gutterBottom sx={{marginTop: "50px"}}>Ilu fanów potrafisz przekonać?</Typography>
                     <Box
                         sx={{width: 300, margin: "50px auto 0"}}
                     >
@@ -149,12 +151,24 @@ export default function EarnCalculator() {
                     </Box>
 
                 </Grid>
-                <Grid item md={6} sm={6} xs={12}>
+                <Grid item md={6} sm={6} xs={12} sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
                     <img style={{maxWidth: "100%", height: "Auto", marginTop: "100px", borderRadius: "10px"}}
                          src={earningCalcImage} alt="woman earning money"/>
-                    <p style={{textAlign: "center"}}>Przykładowe miesięczne dochody to:</p>
-                    <h2 style={{textAlign: "center"}}>{earnings} $</h2>
+                    <Typography variant="subtitle2" gutterBottom sx={{marginTop: '20px'}}>Przykładowe miesięczne dochody to:</Typography>
+                    <Chip icon={<AttachMoneyOutlinedIcon fontSize="large"/>} label={earnings}  sx={{
+                        border: 1,
+                        fontSize: '28px',
+                        width: '250px',
+                        height: '45px',
+                        display: 'flex',
+                        justifyContent: 'space-between'
 
+                    }}/>
                 </Grid>
 
             </Grid>

@@ -8,6 +8,7 @@ import {sendDataAPI} from "../../helpers/api.jsx";
 import {Link} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
+import Typography from "@mui/material/Typography";
 
 export default function AskForm() {
     const [email, setEmail] = useState('');
@@ -61,17 +62,17 @@ export default function AskForm() {
             marginTop: "50px",
 
         }}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <Grid item md={12} sm={12} xs={12} sx={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center"
                 }}>
-                    <h1>Masz pytania, wątpliwości?</h1>
-                    <p>Nie wstydź się i zadaj nam pytanie!</p>
+                    <Typography variant="h4" gutterBottom >Masz pytania, wątpliwości?</Typography>
+                    <Typography variant="subtitle2" gutterBottom sx={{marginTop: '20px'}}>Nie wstydź się i zadaj nam pytanie!</Typography>
                 </Grid>
                 {!isSent ? (
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{marginTop: '20px'}}>
                     <Grid item md={4} sm={12} xs={12} sx={{
                         display: "flex",
                         flexDirection: "column",
@@ -122,7 +123,7 @@ export default function AskForm() {
                     </Grid>
                 </Grid>
                     ) : (
-                        <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: '20px'}}>
                             <Alert severity="success" sx={{textAlign: "center"}}>
                                 <AlertTitle sx={{textAlign: "center"}}>Success</AlertTitle>
                                 Dziękujemy za przesłanie pytania!<br/>
