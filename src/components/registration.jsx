@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { FormControl, InputLabel, OutlinedInput, TextField } from "@mui/material";
+import {AlertTitle, FormControl, InputLabel, OutlinedInput, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
@@ -11,12 +11,15 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
+import {Link} from "react-router-dom";
 
 export default function Registration() {
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isRegistered, setIsRegistered] = useState(false);
 
     async function handleRegistry() {
         if (!isEmailValid) {
@@ -29,6 +32,7 @@ export default function Registration() {
 
         setEmailValue('');
         setPasswordValue('');
+        setIsRegistered(true);
 
         console.log(data);
     }
@@ -73,6 +77,8 @@ export default function Registration() {
                         Zarejestruj się i zacznij zarabiać od pierwszego dnia
                     </Typography>
                     <ArrowDownwardOutlinedIcon fontSize="large" />
+                    {!isRegistered ? (
+                        <>
                     <TextField
                         id="outlined-basic"
                         label="Podaj Twój e-mail"
@@ -110,6 +116,16 @@ export default function Registration() {
                     >
                         Zarejestruj się!
                     </Button>
+                        </>
+                    ) : (
+                        <Alert severity="success">
+                            <AlertTitle>Success</AlertTitle>
+                            Dziękujemy za rejestrację!<br/>
+                            <Link style={{textDecoration: "none", textAlign: "center"}} to="/login">
+                            <strong>Zaloguj się</strong>
+                            </Link>
+                        </Alert>
+                    )}
                 </Grid>
             </Grid>
         </Container>

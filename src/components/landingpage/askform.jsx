@@ -1,16 +1,20 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import {TextField} from "@mui/material";
+import {AlertTitle, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import {useState} from "react";
 import {sendDataAPI} from "../../helpers/api.jsx";
+import {Link} from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 
 export default function AskForm() {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [question, setQuestion] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isSent, setIsSent] = useState(false);
 
 
    async function handleSubmitQuestion() {
@@ -24,6 +28,7 @@ export default function AskForm() {
        setEmail('')
        setName('')
        setQuestion('')
+       setIsSent(true)
 
        return console.log(data)
     }
@@ -65,6 +70,7 @@ export default function AskForm() {
                     <h1>Masz pytania, wątpliwości?</h1>
                     <p>Nie wstydź się i zadaj nam pytanie!</p>
                 </Grid>
+                {!isSent ? (
                 <Grid container spacing={2}>
                     <Grid item md={4} sm={12} xs={12} sx={{
                         display: "flex",
@@ -104,6 +110,7 @@ export default function AskForm() {
                             onChange={handleQuestionChange}
                         />
                     </Grid>
+
                     <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <Button
                             variant="contained"
@@ -114,6 +121,20 @@ export default function AskForm() {
                         </Button>
                     </Grid>
                 </Grid>
+                    ) : (
+                        <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <Alert severity="success" sx={{textAlign: "center"}}>
+                                <AlertTitle sx={{textAlign: "center"}}>Success</AlertTitle>
+                                Dziękujemy za przesłanie pytania!<br/>
+                                Zachęcamy do rejestracji<br/>
+                                <SentimentVerySatisfiedOutlinedIcon fontSize="small" sx={{textAlign: "center"}}/><br/>
+                                <Link style={{textDecoration: "none", textAlign: "center"}} to="/registration" sx={{textAlign: "center"}}>
+                                    <strong>Zarejestruj się!</strong>
+                                </Link>
+                            </Alert>
+                        </Grid>
+                    )}
+
             </Grid>
         </Container>
     )
