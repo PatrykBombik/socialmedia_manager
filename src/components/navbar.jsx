@@ -11,7 +11,6 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip'; TODO ADD AVATAR AFTER LOGIN
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
