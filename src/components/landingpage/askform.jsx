@@ -16,10 +16,12 @@ export default function AskForm() {
     const [question, setQuestion] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isSent, setIsSent] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(true);
 
 
    async function handleSubmitQuestion() {
-       if (!isEmailValid || email ==='' || name === '' || question === '') {
+       if (!isEmailValid || email === '' || name === '' || question === '') {
+           setIsCorrect(false)
            return ;
        }
        const data = await sendDataAPI({
@@ -30,6 +32,8 @@ export default function AskForm() {
        setName('')
        setQuestion('')
        setIsSent(true)
+       setIsCorrect(true)
+
 
        return console.log(data)
     }
@@ -42,7 +46,7 @@ export default function AskForm() {
 
     const handleNameChange = (e) => {
        const name = e.target.value;
-       setName(name);
+       setName(name)
     }
 
     const handleQuestionChange = (e) => {
@@ -59,7 +63,7 @@ export default function AskForm() {
 
     return (
         <Container maxWidth="xl" sx={{
-            marginTop: "50px",
+            marginTop: "100px",
 
         }}>
             <Grid container spacing={2} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -96,6 +100,7 @@ export default function AskForm() {
                             variant="outlined"
                                    value={name}
                                    onChange={handleNameChange}
+
                         />
                     </Grid>
                     <Grid item md={4} sm={12} xs={12}>
@@ -121,6 +126,17 @@ export default function AskForm() {
                             Wyślij
                         </Button>
                     </Grid>
+                    {!isCorrect ? (
+                        <Grid item md={12} sm={12} xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <Alert severity="error" sx={{textAlign: 'center'}}>
+                                <AlertTitle>Error</AlertTitle>
+                                <strong>Proszę uzupełnić wszystkie pola</strong>
+                            </Alert>
+                        </Grid>
+                        ) : (
+                        <></>
+                        )
+                    }
                 </Grid>
                     ) : (
                         <Grid item md={4} sm={12} xs={12} sx={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: '20px'}}>

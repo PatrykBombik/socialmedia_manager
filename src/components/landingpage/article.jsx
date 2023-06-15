@@ -55,7 +55,7 @@ export default function Article() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: '20px'
+                    marginTop: '50px'
                 }}
                 >
                     <Grid item md={6} sm={6} xs={12} style={{
@@ -67,7 +67,7 @@ export default function Article() {
                         <Typography variant="subtitle2" gutterBottom sx={{textAlign: "center", marginLeft: "15px"}}>Za 24,99$ dostaniesz dostęp do wiedzy zdobywanej ponad 3 lata, dzięki której zarobki rzędu 10 000 zł - 12 000 zł to normalność. Jeżeli nie uda, Ci się zarobić w pierwszym miesiącu 25$ zwrócimy Ci pieniądze!</Typography>
                     </Grid>
                     <Grid item md={6} sm={6} xs={12}>
-                        <img src={platform} style={{width:"100%", marginLeft: "10px", borderRadius: "10px"}}/>
+                        <img src={platform} style={{width:"100%", marginLeft: "10px", borderRadius: "10px", marginTop: '30px'}}/>
                     </Grid>
                 </Grid>
             </Grid>

@@ -15,7 +15,7 @@ width: "10%",
 export default function TextCarousel() {
 
     return (
-        <Container maxWidth="xl" style={{marginTop: "50px"}}>
+        <Container maxWidth="xl" style={{marginTop: "100px"}}>
             <Carousel showThumbs={false} autoPlay infiniteLoop showArrows={true}>
                 <div>
                     <p>"Genialny poradnik i zarazem narzędzie, dzięki któremu jestem sama sobie szefem!"</p>
