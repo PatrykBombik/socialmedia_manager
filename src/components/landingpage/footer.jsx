@@ -1,6 +1,7 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
 
 export default function Footer() {
     return (
@@ -11,10 +12,18 @@ export default function Footer() {
         }}>
         <Grid container spacing={2}>
             <Grid item md={12} sm={12} xs={12} sx={{display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
-                <Button href="/">Jak zacząć?</Button>
-                <Button href="/daily">Daily</Button>
-                <Button href="/">Zarejestruj się</Button>
-                <Button href="/login">Logowanie</Button>
+                <Link style={{textDecoration: "none"}} to="/">
+                    <Button>Jak zacząć?</Button>
+                </Link>
+                <Link style={{textDecoration: "none"}} to="/daily">
+                    <Button>Daily</Button>
+                </Link>
+                <Link style={{textDecoration: "none"}} to="/registration">
+                <Button>Zarejestruj się</Button>
+                </Link>
+                <Link style={{textDecoration: "none"}} to="/login">
+                <Button>Logowanie</Button>
+                </Link>
             </Grid>
             <Grid item md={12} sm={12} xs={12} sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                 <p>SocialMediaManager</p>
